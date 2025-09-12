@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify
 import requests
 
 app = Flask(__name__)
-VT_API_KEY = "YOUR_VIRUSTOTAL_API_KEY"
+VT_API_KEY = "249b14a95330bcc0b72f5ebf6fc3a994698eff1f76b683f14e292ca12224341e"
 
 @app.route('/scan', methods=['POST'])
 def scan_url():

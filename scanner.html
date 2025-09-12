@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <nav class="nav-links">
+        <a href="#" class="nav-link active">Home</a>
+        <a href="#" class="nav-link">Scam Reports</a>
+        <a href="qanda.html" class="nav-link">Q&A</a>
+                <a href="#" class="nav-link">Resources</a>
+                <a href="#" class="nav-link">About</a>
+                <a href="login.html" class="nav-link nav-btn">Login</a>
+                <a href="signup.html" class="nav-link nav-btn">Sign Up</a>
+            </nav>
+    <form id="scanForm">
+  <input type="text" id="urlInput" placeholder="Enter URL" required>
+  <button type="submit">Scan</button>
+</form>
+<div id="result"></div>
+
+<script>
+document.getElementById('scanForm').addEventListener('submit', async e => {
+    e.preventDefault();
+    const url = document.getElementById('urlInput').value;
+    const response = await fetch('/scan', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({url})
+    });
+    const data = await response.json();
+    document.getElementById('result').innerText = 
+        data.error ? data.error : `Verdict: ${data.verdict} (${data.flagged}/${data.total_engines} engines flagged)`;
+});
+</script>
+</body>
+</html>

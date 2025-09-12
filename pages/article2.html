@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Detect AI-Generated Emails - SafeGuard Community</title>
+    <link rel="stylesheet" href="../post.css"/>
+</head>
+<body>
+    <header class="header">
+        <div class="nav-container">
+            <div class="logo">
+                <span class="shield-icon">🛡️</span>
+                SafeGuard Community
+            </div>
+            <nav class="nav-links">
+                <a href="../index.html" class="nav-link">← Back to Community</a>
+                <a href="qna.html" class="nav-link">AI Assistant</a>
+                <a href="#" class="nav-link">Resources</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <main class="main-content">
+            <!-- Post Header -->
+            <div class="post-header">
+                <div class="breadcrumb">
+                    <a href="index.html">SafeGuard Community</a> / <a href="#">Questions</a> / AI Email Detection
+                </div>
+                
+                <span class="post-type question">❓ QUESTION</span>
+                
+                <h1 class="post-title" id="post-title">How can I tell if an email is AI-generated?</h1>
+                
+                <div class="post-meta">
+                    <div class="meta-item">
+                        <span>👤</span>
+                        <span id="post-author">@TechNewbie</span>
+                    </div>
+                    <div class="meta-item">
+                        <span>🕐</span>
+                        <span id="post-time">4 hours ago</span>
+                    </div>
+                    <div class="meta-item">
+                        <span>📍</span>
+                        <span id="post-location">Western Cape, Khayelitsha</span>
+                    </div>
+                    <div class="meta-item">
+                        <span>👁️</span>
+                        <span>156 views</span>
+                    </div>
+                </div>
+                
+                <div class="post-tags">
+                    <a href="#" class="tag">#AIDetection</a>
+                    <a href="#" class="tag">#EmailScams</a>
+                    <a href="#" class="tag">#Phishing</a>
+                    <a href="#" class="tag">#TechHelp</a>
+                </div>
+            </div>
+
+            <!-- Post Content -->
+            <div class="post-content" id="post-content">
+                <p>Hi everyone! I'm not very tech-savvy but I've been getting some emails that seem suspiciously well-written for scammers. They have perfect grammar, sound very professional, and even include personal details about me that seem accurate.</p>
+                
+                <p>The thing is, something still feels "off" about these emails. They're too polished, and the writing style feels somehow... artificial? I've heard that scammers are now using AI to write convincing emails, but how can someone like me tell the difference?</p>
+                
+                <h4>Examples of what I'm seeing:</h4>
+                <ul>
+                    <li>Perfect grammar and spelling (unusual for typical scam emails)</li>
+                    <li>Very formal, corporate language throughout</li>
+                    <li>Long, detailed explanations that seem to go in circles</li>
+                    <li>Generic personal touches that could apply to anyone</li>
+                </ul>
+                
+                <h4>My specific concerns:</h4>
+                <ol>
+                    <li>How can I identify AI-written text in emails?</li>
+                    <li>What are the telltale signs I should look for?</li>
+                    <li>Are there any simple tools to help detect AI-generated content?</li>
+                    <li>Should I be more suspicious of "perfect" emails now?</li>
+                </ol>
+                
+                <p>Any advice would be greatly appreciated! I want to protect myself but don't want to become paranoid about every email I receive.</p>
+                
+                <p><strong>UPDATE:</strong> I've attached screenshots of the suspicious emails (with personal info removed) in the comments below.</p>
+            </div>
+
+            <!-- Vote Section -->
+            <div class="vote-section">
+                <div class="vote-container">
+                    <button class="vote-btn upvote" onclick="vote('up')" id="upvote-btn">👍</button>
+                    <span class="vote-count" id="vote-count">18</span>
+                    <button class="vote-btn downvote" onclick="vote('down')" id="downvote-btn">👎</button>
+                </div>
+                <div class="share-section">
+                    <button class="share-btn" onclick="sharePost()">📤 Share</button>
+                    <button class="share-btn" onclick="reportPost()">🚩 Report</button>
+                </div>
+            </div>
+
+            <!-- Comments Section -->
+            <div class="comments-section">
+                <div class="comments-header">
+                    <h2 class="comments-title">Answers & Discussion</h2>
+                    <span class="comment-count">15 comments • 3 expert answers</span>
+                </div>
+
+                <!-- Existing Comments -->
+                <div id="comments-container">
+                    <article class="comment expert-answer">
+                        <div class="comment-header">
+                            <div class="comment-author">
+                                @CyberSecurityPro
+                                <span class="expert-badge">Expert</span>
+                                <span class="best-answer-badge">✅ Best Answer</span>
+                            </div>
+                            <div class="comment-time">3 hours ago</div>
+                        </div>
+                        <div class="comment-content">
+                            <p><strong>Great question! Here are the key signs to identify AI-generated emails:</strong></p>
+                            
+                            <p><strong>🔍 Language Patterns:</strong></p>
+                            <ul>
+                                <li>Repetitive phrasing or sentence structures</li>
+                                <li>Overly formal tone that doesn't match the context</li>
+                                <li>Generic statements that could apply to anyone</li>
+                                <li>Lack of genuine personal touches or errors humans make</li>
+                            </ul>
+                            
+                            <p><strong>🚩 Red Flags:</strong></p>
+                            <ul>
+                                <li>Perfect grammar but odd word choices</li>
+                                <li>Information that's technically correct but feels "scraped"</li>
+                                <li>Responses that don't quite address your specific situation</li>
+                                <li>Inconsistent knowledge (knows some details but misses obvious ones)</li>
+                            </ul>
+                            
+                            <p><strong>🛠️ Simple Detection Tips:</strong></p>
+                            <ul>
+                                <li>Ask specific questions only the real sender would know</li>
+                                <li>Look for contextual understanding, not just information regurgitation</li>
+                                <li>Check if the email addresses your exact situation or uses generic responses</li>
+                            </ul>
+                        </div>
+                        <div class="comment-actions">
+                            <button class="comment-action" onclick="likeComment(1)">
+                                <span>👍</span> <span>34</span>
+                            </button>
+                            <button class="comment-action" onclick="replyToComment(1)">
+                                <span>💬</span> Reply
+                            </button>
+                            <button class="comment-action" onclick="markHelpful(1)">
+                                <span>⭐</span> Mark Helpful
+                            </button>
+                        </div>
+                    </article>
+
+                    <article class="comment">
+                        <div class="comment-header">
+                            <div class="comment-author">@EmailDetective</div>
+                            <div class="comment-time">2 hours ago</div>
+                        </div>
+                        <div class="comment-content">
+                            I've been tracking these too! Another sign I've noticed is that AI emails often have this weird "trying too hard to be helpful" tone. Like they'll give you way more information than necessary, but miss the specific thing you actually need.
+                        </div>
+                        <div class="comment-actions">
+                            <button class="comment-action" onclick="likeComment(2)">
+                                <span>👍</span> <span>12</span>
+                            </button>
+                            <button class="comment-action" onclick="replyToComment(2)">
+                                <span>💬</span> Reply
+                            </button>
+                        </div>
+                    </article>
+
+                    <article class="comment expert-answer">
+                        <div class="comment-header">
+                            <div class="comment-author">
+                                @PhishingExpert
+                                <span class="expert-badge">Expert</span>
+                            </div>
+                            <div class="comment-time">90 minutes ago</div>
+                        </div>
+                        <div class="comment-content">
+                            <p>@TechNewbie - You're absolutely right to trust your instincts! Here's a simple test I recommend:</p>
+                            
+                            <p><strong>"The Human Response Test":</strong></p>
+                            <ol>
+                                <li>Reply with a specific, personal question</li>
+                                <li>Include an intentional minor error in your message</li>
+                                <li>Ask about something that requires real understanding, not just information lookup</li>
+                            </ol>
+                            
+                            <p>AI responses often miss nuanced questions and won't address the human context of your situation. Real humans will often acknowledge your error or ask for clarification.</p>
+                        </div>
+                        <div class="comment-actions">
+                            <button class="comment-action" onclick="likeComment(3)">
+                                <span>👍</span> <span>28</span>
+                            </button>
+                            <button class="comment-action" onclick="replyToComment(3)">
+                                <span>💬</span> Reply
+                            </button>
+                        </div>
+                    </article>
+
+                    <article class="comment">
+                        <div class="comment-header">
+                            <div class="comment-author">@GrannyTech</div>
+                            <div class="comment-time">1 hour ago</div>
+                        </div>
+                        <div class="comment-content">
+                            This is so helpful! I'm 71 and have been getting these "perfect" emails too. I thought I was being paranoid, but now I understand why they felt wrong. The lack of small human errors was actually a red flag!
+                        </div>
+                        <div class="comment-actions">
+                            <button class="comment-action" onclick="likeComment(4)">
+                                <span>👍</span> <span>16</span>
+                            </button>
+                            <button class="comment-action" onclick="replyToComment(4)">
+                                <span>💬</span> Reply
+                            </button>
+                        </div>
+                    </article>
+
+                    <article class="comment">
+                        <div class="comment-header">
+                            <div class="comment-author">@TechNewbie</div>
+                            <div class="comment-time">45 minutes ago</div>
+                        </div>
+                        <div class="comment-content">
+                            <p>Thank you all so much! This is incredibly helpful. I tried the "human response test" on one of the suspicious emails and you're right - the response was perfectly formatted but completely missed the context of my specific question.</p>
+                            
+                            <p>Here are the screenshots I mentioned (personal info removed): [Screenshots would be here]</p>
+                            
+                            <p>Looking at them now with your advice, I can see exactly what you mean about the "trying too hard" tone and generic personal touches!</p>
+                        </div>
+                        <div class="comment-actions">
+                            <button class="comment-action" onclick="likeComment(5)">
+                                <span>👍</span> <span>8</span>
+                            </button>
+                            <button class="comment-action" onclick="replyToComment(5)">
+                                <span>💬</span> Reply
+                            </button>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- Add Comment Form -->
+                <div class="add-comment">
+                    <h4>💬 Add Your Answer</h4>
+                    <div class="comment-form">
+                        <textarea 
+                            class="comment-input" 
+                            id="new-comment" 
+                            placeholder="Share your experience with AI-generated emails, detection tips, or ask follow-up questions..."
+                        ></textarea>
+                        <div class="comment-form-actions">
+                            <div style="font-size: 0.9rem; color: #6c757d;">
+                                💡 Tip: Include specific examples or detection methods that have worked for you
+                            </div>
+                            <button class="comment-submit" onclick="addComment()">
+                                Post Answer
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <aside class="sidebar">
+            <!-- Author Info -->
+            <div class="widget">
+                <h3 class="widget-title">👤 Asked By</h3>
+                <div class="author-info">
+                    <div class="author-avatar">TN</div>
+                    <div class="author-details">
+                        <h4>@TechNewbie</h4>
+                        <p>Community Member since Mar 2024<br>
+                        3 questions • 12 helpful votes received</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question Stats -->
+            <div class="widget">
+                <h3 class="widget-title">📊 Question Stats</h3>
+                <div class="trending-item">
+                    <span class="trending-text">Views</span>
+                    <span class="trending-count">156</span>
+                </div>
+                <div class="trending-item">
+                    <span class="trending-text">Upvotes</span>
+                    <span class="trending-count">18</span>
+                </div>
+                <div class="trending-item">
+                    <span class="trending-text">Expert Answers</span>
+                    <span class="trending-count">3</span>
+                </div>
+                <div class="trending-item">
+                    <span class="trending-text">Community Answers</span>
+                    <span class="trending-count">12</span>
+                </div>
+            </div>
+
+            <!-- Related Questions -->
+            <div class="widget">
+                <h3 class="widget-title">🔗 Related Questions</h3>
+                <div class="similar-post" onclick="loadPost(5)">
+                    <div class="similar-post-title">How to Verify Suspicious Phone Calls?</div>
+                    <div class="similar-post-meta">@SafetyFirst • 23 answers • Solved</div>
+                </div>
+                <div class="similar-post" onclick="loadPost(6)">
+                    <div class="similar-post-title">Best Practices for Email Security</div>
+                    <div class="similar-post-meta">@SecureUser • 18 answers • Expert verified</div>
+                </div>
+                <div class="similar-post" onclick="loadPost(7)">
+                    <div class="similar-post-title">AI Scam Detection Tools - Which Ones Work?</div>
+                    <div class="similar-post-meta">@ToolTester • 31 answers • Hot topic</div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="widget">
+                <h3 class="widget-title">🛠️ Quick Actions</h3>
+                <button class="comment-submit" style="width: 100%; margin-bottom: 1rem;" onclick="askSimilar()">
+                    ❓ Ask Similar Question
+                </button>
+                <button class="comment-submit" style="width: 100%; margin-bottom: 1rem;" onclick="scanEmail()">
+                    🔍 Scan Suspicious Email
+                </button>
+                <button class="comment-submit" style="width: 100%;" onclick="getExpertHelp()">
+                    👨‍💻 Get Expert Help
+                </button>
+            </div>
+        </aside>
+    </div>
+    <script src="post.js"></script>
+</body>
+</html>
