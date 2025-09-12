@@ -28,12 +28,13 @@
     <div class="container">
         <main class="main-content">
             <div class="tabs">
-                <button class="tab active" onclick="showTab('all')">All Posts</button>
-                <button class="tab" onclick="showTab('scams')">Scam Reports</button>
-                <button class="tab" onclick="showTab('questions')">Q&A</button>
+                <button class="tab" onclick="showTab('community', event)">Community</button>
+                <button class="tab" onclick="showTab('scams', event)">Scam Reports</button>
+                <button class="tab active" onclick="showTab('all', event)">All Posts</button>
             </div>
+            
 
-            <div class="tab-content">
+            <div class="tab-section" id="main-posts" style="display:block;">
                 <div class="create-post" onclick="showCreateForm()">
                     <h3>Share Your Experience or Ask a Question</h3>
                     <p>Help protect your community by reporting AI scams or asking about suspicious activity</p>
@@ -46,8 +47,8 @@
                         <div class="post-header">
                             <span class="post-type scam-alert">🚨 SCAM ALERT</span>
                             <div class="post-meta">
-                                Posted by @SafeUser123 • 2 hours ago • Los Angeles, CA
-                            </div>
+                             Posted by @SafeUser123 • 2 hours ago • Western Cape, Strand
+                                    </div>
                         </div>
                         <div class="post-body">
                             <h3 class="post-title">AI Voice Clone Scam Targeting Seniors</h3>
@@ -67,12 +68,12 @@
                         <div class="post-header">
                             <span class="post-type question">❓ QUESTION</span>
                             <div class="post-meta">
-                                Posted by @TechNewbie • 4 hours ago • Houston, TX
-                            </div>
+                                 Posted by @TechNewbie • 4 hours ago • Western Cape, Khayelitsha
+                                    </div>
                         </div>
                         <div class="post-body">
                             <h3 class="post-title">How can I tell if an email is AI-generated?</h3>
-                            <p class="post-preview">I've been getting emails that seem too well-written to be from scammers, but something feels off. Are there signs that an email might be written by AI?</p>
+                            <p class="post-p    review">I've been getting emails that seem too well-written to be from scammers, but something feels off. Are there signs that an email might be written by AI?</p>
                         </div>
                         <div class="post-footer">
                             <div class="post-stats">
@@ -88,8 +89,8 @@
                         <div class="post-header">
                             <span class="post-type warning">⚠️ WARNING</span>
                             <div class="post-meta">
-                                Posted by @SmallBizOwner • 6 hours ago • Miami, FL
-                            </div>
+                                  Posted by @SmallBizOwner • 6 hours ago • Western Cape, Claremont
+                                    </div>
                         </div>
                         <div class="post-body">
                             <h3 class="post-title">Deepfake Video Call Scam Targeting Business Owners</h3>
@@ -109,8 +110,8 @@
                         <div class="post-header">
                             <span class="post-type question">❓ QUESTION</span>
                             <div class="post-meta">
-                                Posted by @ConcernedGrandpa • 8 hours ago • Phoenix, AZ
-                            </div>
+                                     Posted by @ConcernedGrandpa • 8 hours ago • Western Cape, Bellville
+                                    </div>
                         </div>
                         <div class="post-body">
                             <h3 class="post-title">What should I teach my grandchildren about AI safety?</h3>
@@ -124,6 +125,46 @@
                             </div>
                         </div>
                     </article>
+                </div>
+            </div>
+
+            <!-- Community Tab Content -->
+            <div id="community-tab" class="tab-section" style="display:none;">
+                <div class="create-post">
+                    <h3>Join Your Local Community</h3>
+                    <p>Select your area in the Western Cape to ask questions, share local scam alerts, report suspicious activity, or discuss cybersecurity issues with people near you..</p>
+                    <form class="location-form" onsubmit="joinCommunity(event)">
+    <label for="area">Select Your Area in Western Cape:</label>
+    <select id="area" name="area" required>
+        <option value="">-- Choose Area --</option>
+        <option value="Cape Town">Cape Town</option>
+        <option value="Wynberg">Wynberg</option>
+        <option value="Claremont">Claremont</option>
+        <option value="Bellville">Bellville</option>
+        <option value="Mitchells Plain">Mitchells Plain</option>
+        <option value="Stellenbosch">Stellenbosch</option>
+        <option value="Somerset West">Somerset West</option>
+        <option value="Paarl">Paarl</option>
+        <option value="George">George</option>
+        <option value="Knysna">Knysna</option>
+        <option value="Mossel Bay">Mossel Bay</option>
+        <option value="Khayelitsha">Khayelitsha</option>
+        <option value="Gugulethu">Gugulethu</option>
+        <option value="Langa">Langa</option>
+        <option value="Fish Hoek">Fish Hoek</option>
+        <option value="Grassy Park">Grassy Park</option>
+        <option value="Durbanville">Durbanville</option>
+        <option value="Atlantis">Atlantis</option>
+        <option value="Strand">Strand</option>
+    </select>
+    <br><br>
+    <button class="create-btn" type="submit">Join Community</button>
+    <button class="create-btn" type="button" onclick="areaNotListed()" style="margin-top: 0.5rem;">My area is not listed</button>
+</form>
+                </div>
+                <div class="posts" id="community-feed">
+                    <h3>🌍 Local Community Feed</h3>
+                    <p class="placeholder">Select your province above to see updates from your area.</p>
                 </div>
             </div>
         </main>
