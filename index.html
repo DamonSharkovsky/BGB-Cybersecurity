@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SafeGuard Community - AI Scam Awareness Platform</title>
+    <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+    <header class="header">
+        <div class="nav-container">
+            <div class="logo">
+                <span class="shield-icon">🛡️</span>
+                SafeGuard Community
+            </div>
+            <nav class="nav-links">
+                <a href="#" class="nav-link active">Home</a>
+                <a href="#" class="nav-link">Scam Reports</a>
+                <a href="qanda.html" class="nav-link">Q&A</a>
+                <a href="#" class="nav-link">Resources</a>
+                <a href="#" class="nav-link">About</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <main class="main-content">
+            <div class="tabs">
+                <button class="tab active" onclick="showTab('all')">All Posts</button>
+                <button class="tab" onclick="showTab('scams')">Scam Reports</button>
+                <button class="tab" onclick="showTab('questions')">Q&A</button>
+            </div>
+
+            <div class="tab-content">
+                <div class="create-post" onclick="showCreateForm()">
+                    <h3>Share Your Experience or Ask a Question</h3>
+                    <p>Help protect your community by reporting AI scams or asking about suspicious activity</p>
+                    <button class="create-btn">+ Create New Post</button>
+                </div>
+
+                <div class="posts" id="posts-container">
+                    <!-- Scam Report Post -->
+                    <article class="post">
+                        <div class="post-header">
+                            <span class="post-type scam-alert">🚨 SCAM ALERT</span>
+                            <div class="post-meta">
+                                Posted by @SafeUser123 • 2 hours ago • Los Angeles, CA
+                            </div>
+                        </div>
+                        <div class="post-body">
+                            <h3 class="post-title">AI Voice Clone Scam Targeting Seniors</h3>
+                            <p class="post-preview">My grandmother received a call that sounded exactly like my voice asking for emergency money. The scammer had cloned my voice from my social media videos. She almost fell for it...</p>
+                        </div>
+                        <div class="post-footer">
+                            <div class="post-stats">
+                                <span class="stat">👍 24 upvotes</span>
+                                <span class="stat">💬 8 comments</span>
+                                <span class="stat">⚠️ 12 similar reports</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Question Post -->
+                    <article class="post">
+                        <div class="post-header">
+                            <span class="post-type question">❓ QUESTION</span>
+                            <div class="post-meta">
+                                Posted by @TechNewbie • 4 hours ago • Houston, TX
+                            </div>
+                        </div>
+                        <div class="post-body">
+                            <h3 class="post-title">How can I tell if an email is AI-generated?</h3>
+                            <p class="post-preview">I've been getting emails that seem too well-written to be from scammers, but something feels off. Are there signs that an email might be written by AI?</p>
+                        </div>
+                        <div class="post-footer">
+                            <div class="post-stats">
+                                <span class="stat">👍 18 upvotes</span>
+                                <span class="stat">💬 15 comments</span>
+                                <span class="stat">✅ 3 expert answers</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Warning Post -->
+                    <article class="post">
+                        <div class="post-header">
+                            <span class="post-type warning">⚠️ WARNING</span>
+                            <div class="post-meta">
+                                Posted by @SmallBizOwner • 6 hours ago • Miami, FL
+                            </div>
+                        </div>
+                        <div class="post-body">
+                            <h3 class="post-title">Deepfake Video Call Scam Targeting Business Owners</h3>
+                            <p class="post-preview">Someone made a deepfake video call pretending to be my business partner asking me to transfer funds. The video quality was good enough that I almost believed it...</p>
+                        </div>
+                        <div class="post-footer">
+                            <div class="post-stats">
+                                <span class="stat">👍 31 upvotes</span>
+                                <span class="stat">💬 12 comments</span>
+                                <span class="stat">⚠️ 6 similar reports</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Community Question -->
+                    <article class="post">
+                        <div class="post-header">
+                            <span class="post-type question">❓ QUESTION</span>
+                            <div class="post-meta">
+                                Posted by @ConcernedGrandpa • 8 hours ago • Phoenix, AZ
+                            </div>
+                        </div>
+                        <div class="post-body">
+                            <h3 class="post-title">What should I teach my grandchildren about AI safety?</h3>
+                            <p class="post-preview">My grandchildren are very tech-savvy but I'm worried they might not recognize new AI-powered scams. What are the most important things they should know?</p>
+                        </div>
+                        <div class="post-footer">
+                            <div class="post-stats">
+                                <span class="stat">👍 45 upvotes</span>
+                                <span class="stat">💬 22 comments</span>
+                                <span class="stat">📚 Added to resources</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </main>
+
+        <aside class="sidebar">
+            <div class="widget">
+                <h3 class="widget-title">🔥 Trending Threats</h3>
+                <div class="trending-item">
+                    <span class="trending-text">AI Voice Cloning Scams</span>
+                    <span class="trending-count">24 reports</span>
+                </div>
+                <div class="trending-item">
+                    <span class="trending-text">Deepfake Video Calls</span>
+                    <span class="trending-count">18 reports</span>
+                </div>
+                <div class="trending-item">
+                    <span class="trending-text">AI-Generated Phishing Emails</span>
+                    <span class="trending-count">31 reports</span>
+                </div>
+                <div class="trending-item">
+                    <span class="trending-text">Fake AI Customer Service</span>
+                    <span class="trending-count">12 reports</span>
+                </div>
+            </div>
+
+            <div class="widget">
+                <h3 class="widget-title">💡 Daily Safety Tip</h3>
+                <div class="safety-tip">
+                    <div class="tip-title">Voice Verification</div>
+                    <div class="tip-text">If someone calls claiming to be family in an emergency, hang up and call them back on their known number. Voice cloning technology can now replicate voices with just a few seconds of audio.</div>
+                </div>
+            </div>
+
+            <div class="widget">
+                <h3 class="widget-title">📊 Community Stats</h3>
+                <div class="trending-item">
+                    <span class="trending-text">Total Reports</span>
+                    <span class="trending-count">1,247</span>
+                </div>
+                <div class="trending-item">
+                    <span class="trending-text">Active Communities</span>
+                    <span class="trending-count">89</span>
+                </div>
+                <div class="trending-item">
+                    <span class="trending-text">Questions Answered</span>
+                    <span class="trending-count">456</span>
+                </div>
+                <div class="trending-item">
+                    <span class="trending-text">Scams Prevented</span>
+                    <span class="trending-count">312</span>
+                </div>
+            </div>
+
+            <div class="widget">
+                <h3 class="widget-title">🛠️ Quick Tools</h3>
+                <button class="create-btn" style="width: 100%; margin-bottom: 1rem;">Check Suspicious Link</button>
+                <button class="create-btn" style="width: 100%; margin-bottom: 1rem;">Analyze Voice Message</button>
+                <button class="create-btn" style="width: 100%;">Report Scam</button>
+            </div>
+        </aside>
+    </div>
+
+    <script>
+        function showTab(tabName) {
+            // Remove active class from all tabs
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+            
+            // Filter posts based on tab (this would connect to backend in real implementation)
+            const posts = document.querySelectorAll('.post');
+            posts.forEach(post => {
+                const postType = post.querySelector('.post-type');
+                if (tabName === 'all') {
+                    post.style.display = 'block';
+                } else if (tabName === 'scams' && postType.classList.contains('scam-alert')) {
+                    post.style.display = 'block';
+                } else if (tabName === 'scams' && postType.classList.contains('warning')) {
+                    post.style.display = 'block';
+                } else if (tabName === 'questions' && postType.classList.contains('question')) {
+                    post.style.display = 'block';
+                } else {
+                    post.style.display = 'none';
+                }
+            });
+        }
+
+        function showCreateForm() {
+            alert('Create Post Modal would open here!\n\nFeatures:\n- Select post type (Scam Report, Question, Warning)\n- Add title and description\n- Include location (optional)\n- Add evidence/screenshots\n- Tag threat type');
+        }
+
+        // Simulate real-time updates
+        function addNotification() {
+            const notifications = [
+                "🚨 New scam reported in your area",
+                "💬 Your question received a new answer",
+                "⚠️ Trending threat alert: AI voice scams increasing",
+                "✅ Community verified your scam report"
+            ];
+            
+            // This would be implemented with WebSocket or polling in real app
+            console.log("Notification system would show:", notifications[Math.floor(Math.random() * notifications.length)]);
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('SafeGuard Community Platform Loaded');
+            console.log('Backend would handle: User authentication, post CRUD operations, AI threat analysis, community moderation');
+            
+            // Simulate periodic updates
+            setInterval(addNotification, 30000);
+        });
+    </script>
+</body>
+</html>
