@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Threat Assistant - SafeGuard Community</title>
+    <link rel="stylesheet" href="q&a.css"/>
+    
+
+        
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🤖 AI Threat Assistant</h1>
+            <p>Ask me anything about AI scams, deepfakes, and digital safety</p>
+        </div>
+
+        <div class="chat-container" id="chat-container">
+            <div class="welcome-message">
+                <h3>👋 Welcome! I'm here to help you understand AI threats and stay safe online.</h3>
+                <p>Ask me about voice cloning, deepfakes, phishing emails, or any AI-related security concerns.</p>
+            </div>
+        </div>
+
+        <div class="input-section">
+            <div class="quick-questions">
+                <h3>💡 Quick Questions:</h3>
+                <div class="question-chips">
+                    <div class="question-chip" onclick="askQuickQuestion('How can I detect AI-generated voice calls?')">
+                        How can I detect AI voice calls?
+                    </div>
+                    <div class="question-chip" onclick="askQuickQuestion('What are the signs of a deepfake video?')">
+                        Signs of deepfake videos?
+                    </div>
+                    <div class="question-chip" onclick="askQuickQuestion('How to protect myself from AI phishing emails?')">
+                        AI phishing protection?
+                    </div>
+                    <div class="question-chip" onclick="askQuickQuestion('What should I do if I suspect an AI scam?')">
+                        Suspected AI scam - what to do?
+                    </div>
+                </div>
+            </div>
+
+            <div class="input-container">
+                <div class="input-wrapper">
+                    <textarea 
+                        id="question-input" 
+                        class="question-input" 
+                        placeholder="Ask me about AI threats, scams, or digital safety..."
+                        onkeypress="handleKeyPress(event)"
+                    ></textarea>
+                </div>
+                <button class="send-button" id="send-button" onclick="sendQuestion()">
+                    Send
+                </button>
+            </div>
+        </div>
+
+        <div class="typing-indicator" id="typing-indicator">
+            <div class="message-avatar ai-avatar">🤖</div>
+            <div class="typing-dots">
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+            </div>
+        </div>
+    </div>
+    <script src="qanda.js" ></script>
+
+
+</body>
+</html>
