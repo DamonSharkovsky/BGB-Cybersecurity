@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Safeguard community </title>
+    <link rel="stylesheet" href="/login_style.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="form-header">
+            <span class="logo">Safeguard Community</span>
+        </div>
+        <form class="login-form">
+            <h2 class="login-title">Welcome Back</h2>
+            <div class="input-group">
+                <input type="text" name="username" required autocomplete="off" class="login-input">
+                <label class="login-label">Username</label>
+            </div>
+            <div class="input-group">
+                <input type="password" name="password" required autocomplete="off" class="login-input">
+                <label class="login-label">Password</label>
+            </div>
+            <button type="submit" class="login-btn">Login</button>
+        </form>
+    </div>
+    <script>
+        // Animate input labels on focus
+        document.querySelectorAll('.login-input').forEach(input => {
+            input.addEventListener('focus', function() {
+                this.nextElementSibling.classList.add('active');
+            });
+            input.addEventListener('blur', function() {
+                if (!this.value) {
+                    this.nextElementSibling.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+</body>
+</html>
