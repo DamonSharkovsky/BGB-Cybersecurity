@@ -104,3 +104,17 @@ document.addEventListener('DOMContentLoaded', function() {
     // Simulate periodic updates
     setInterval(addNotification, 30000);
 });
+
+
+const articles = document.querySelectorAll("article");
+
+
+articles.forEach(article => {
+    article.addEventListener("click", () => {
+        console.log("catch")
+        const targetPage = article.getAttribute("data-target");
+
+        window.location.href = targetPage;
+    })
+    
+})
