@@ -71,9 +71,36 @@ function closeModal() {
 
 function submitPost(event) {
     event.preventDefault();
-    // You can handle the form data here (send to backend, show success, etc.)
-    alert("Your post has been submitted!");
+    // post scam alert
+
+    const title = document.getElementById('postTitle').value;
+    const body = document.getElementById('postBody').value;
+
+    // fetch('/submit', {
+    //     method: 'POST',
+    //     headers: {
+    //         'Content-Type': 'application/json'
+    //     },
+    //     body: JSON.stringify({
+    //         title: title,
+    //         body: body,
+    //         location: "South Africa", // This would be dynamic in a real app
+    //         date: new Date().toISOString(),
+    //     })
+    // }).then(response => {
+    //     if (response.ok) {
+    //         alert('Post submitted successfully!');
+    //     } else {
+    //         alert('Failed to submit post.');
+    //     }
+    // }).catch(error => {
+    //     console.error('Error submitting post:', error);
+    //     alert('An error occurred while submitting your post.');
+    // });
+    console.log("listen")
+    createPost(title, body);
     closeModal();
+
 }
 
 // Simulate real-time updates
@@ -151,3 +178,83 @@ articles.forEach(article => {
     })
     
 })
+
+
+async function fetchAllData() {
+    try {
+        const response = await fetch('https://localhost:5000/all');
+        const data = await response.json();
+        updateData(data);
+    } catch (error) {
+        console.error('Error fetching data:', error);
+    }
+}
+
+window.onload = () => {
+    fetchAllData();
+}
+
+function updateData(data) {
+    // document.getElementById('totalScams').innerText = data.totalScams;
+    // document.getElementById('totalWarnings').innerText = data.totalWarnings;
+    // document.getElementById('totalQuestions').innerText = data.totalQuestions;
+    // document.getElementById('totalCommunityPosts').innerText = data.totalCommunityPosts;
+}
+
+document.getElementById('post-button').addEventListener('click', submitPost);
+
+
+function createPost(title, body) {
+    const postContainer = document.getElementById('posts-container');
+    
+
+    const post = document.createElement('article');
+    post.className = 'post';
+    postContainer.prepend(post);
+
+    const postHeader = document.createElement('div');
+    // postHeader.add.classList("post-body");
+    postHeader.className = 'post-header';
+    post.appendChild(postHeader);
+
+    const postType = document.createElement('span');
+    postType.className = 'post-type scam-alert';
+    postType.innerText = '🚨 SCAM ALERT'; 
+    postHeader.appendChild(postType);
+
+    const postMeta = document.createElement('div');
+    postMeta.className = 'post-meta';
+    postMeta.innerText = `Posted by @User • just now • Location`;
+    postHeader.appendChild(postMeta);
+
+    const postBody = document.createElement('div');
+    postBody.className = 'post-body';
+    post.appendChild(postBody);
+
+    const postTitle = document.createElement('h3');
+    postTitle.className = 'post-title';
+    postTitle.innerText = title;
+    postBody.appendChild(postTitle);
+
+    const postPreview = document.createElement('p');
+    postPreview.className = 'post-preview';
+    postPreview.innerText = body;
+    postBody.appendChild(postPreview);
+
+    postHeader.appendChild(postType);
+    postHeader.appendChild(postMeta);
+    post.appendChild(postHeader);
+    post.appendChild(postBody);
+
+    const postActions = document.createElement('div');
+    postActions.className = 'post-footer';
+
+    const postStat = document.createElement('div');
+    postStat.className = 'post-stats';
+    postStat.innerHTML = `<span class="stat">👍 24 upvotes</span>
+                                <span class="stat">💬 8 comments</span>
+                                <span class="stat">⚠️ 12 similar reports</span>`;
+    postActions.appendChild(postStat);
+
+    post.appendChild(postActions);
+}
