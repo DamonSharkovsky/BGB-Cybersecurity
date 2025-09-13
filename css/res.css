@@ -1,0 +1,139 @@
+/* ====== Base Styles ====== */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: linear-gradient(135deg, #e9eafc 0%, #f8f9fa 100%);
+    color: #222;
+    margin: 0;
+    padding: 0;
+}
+
+/* ====== Header & Navigation ====== */
+.header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 1.2rem 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+}
+
+.nav-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.shield-icon {
+    font-size: 1.6rem;
+}
+
+.nav-links {
+    display: flex;
+    gap: 1.2rem;
+}
+
+.nav-link {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.3rem 0.8rem;
+    border-radius: 5px;
+    transition: background 0.2s;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    background: rgba(255,255,255,0.13);
+}
+
+.nav-btn {
+    background: #fff;
+    color: #764ba2;
+    border-radius: 5px;
+    padding: 0.3rem 1rem;
+    margin-left: 0.5rem;
+    font-weight: bold;
+    transition: background 0.2s, color 0.2s;
+    border: none;
+    cursor: pointer;
+}
+
+.nav-btn:hover {
+    background: #e0e7ff;
+    color: #667eea;
+}
+
+/* ====== Resources Container ====== */
+.resources-container {
+    max-width: 800px;
+    margin: 2.5rem auto;
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 8px 32px rgba(102,126,234,0.07);
+    padding: 2.5rem 2rem;
+}
+
+.resources-container h1 {
+    font-size: 2.2rem;
+    margin-bottom: 1.2rem;
+    color: #667eea;
+    text-align: center;
+}
+
+.resource-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.resource-list li {
+    margin-bottom: 1.2rem;
+    background: #f8f9fa;
+    border-radius: 10px;
+    padding: 1.2rem 1.5rem;
+    box-shadow: 0 2px 8px rgba(102,126,234,0.05);
+}
+
+.resource-link {
+    font-size: 1.1rem;
+    color: #667eea;
+    font-weight: bold;
+    text-decoration: underline;
+    transition: color 0.2s;
+}
+
+.resource-link:hover {
+    color: #764ba2;
+}
+
+.resource-desc {
+    font-size: 1.05rem;
+    color: #444;
+    margin-top: 0.2rem;
+}
+
+@media (max-width: 700px) {
+    .resources-container {
+        padding: 1.2rem 0.5rem;
+    }
+    .nav-container {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 0 1rem;
+    }
+    .resources-container h1 {
+        font-size: 1.5rem;
+    }
+    .resource-list li {
+        padding: 1rem;
+    }
+}
