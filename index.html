@@ -28,7 +28,7 @@
         <main class="main-content">
             <div class="tabs">
                 <button class="tab" onclick="showTab('community', event)">Community</button>
-                <button class="tab" onclick="showTab('scams', event)">Scam Reports</button>
+                <button class="tab" onclick="showTab('scams', event)">News Reports</button>
                 <button class="tab active" onclick="showTab('all', event)">All Posts</button>
             </div>
             
@@ -40,17 +40,13 @@
                     <button class="create-btn">+ Create New Post</button>
                 </div>
 
-                <div id="create-scam-container" class="create-post" onclick="showScamReportForm()" style="display:none;">
-                    <h3>Report a Scam</h3>
-                    <p>Seen a scam? Help others by reporting it directly and anonymously.</p>
-                    <button class="create-btn" style="background: #e53935;">+ Create Scam Report</button>
-                </div>
+
 
                 <div class="posts" id="posts-container">
                     <!-- Scam Report Post -->
                     <article class="post" data-target="pages/article1.html">
                         <div class="post-header">
-                            <span class="post-type scam-alert">🚨 SCAM ALERT</span>
+                            <span class="post-type scam-alert">SCAM ALERT</span>
                             <div class="post-meta">
                              Posted by @SafeUser123 • 2 hours ago • Western Cape, Strand
                                     </div>
@@ -71,7 +67,7 @@
                     <!-- Question Post -->
                     <article class="post" data-target="pages/article2.html">
                         <div class="post-header">
-                            <span class="post-type question">❓ QUESTION</span>
+                            <span class="post-type question">QUESTION</span>
                             <div class="post-meta">
                                  Posted by @TechNewbie • 4 hours ago • Western Cape, Khayelitsha
                                     </div>
@@ -92,7 +88,7 @@
                     <!-- Warning Post -->
                     <article class="post" data-target="pages/article3.html">
                         <div class="post-header">
-                            <span class="post-type warning">⚠️ WARNING</span>
+                            <span class="post-type warning">WARNING</span>
                             <div class="post-meta">
                                   Posted by @SmallBizOwner • 6 hours ago • Western Cape, Claremont
                                     </div>
@@ -113,7 +109,7 @@
                     <!-- Community Question -->
                     <article class="post" data-target="pages/article4.html">
                         <div class="post-header">
-                            <span class="post-type question">❓ QUESTION</span>
+                            <span class="post-type question">QUESTION</span>
                             <div class="post-meta">
                                      Posted by @ConcernedGrandpa • 8 hours ago • Western Cape, Bellville
                                     </div>
@@ -168,7 +164,7 @@
 </form>
                 </div>
                 <div class="posts" id="community-feed">
-                    <h3>🌍 Local Community Feed</h3>
+                    <h3>Local Community Feed</h3>
                     <p class="placeholder">Select your province above to see updates from your area.</p>
                 </div>
             </div>
@@ -193,7 +189,7 @@
 
         <aside class="sidebar">
             <div class="widget">
-                <h3 class="widget-title">🔥 Trending Threats</h3>
+                <h3 class="widget-title">Trending Threats</h3>
                 <div class="trending-item">
                     <span class="trending-text">AI Voice Cloning Scams</span>
                     <span class="trending-count">24 reports</span>
@@ -213,7 +209,7 @@
             </div>
 
             <div class="widget">
-                <h3 class="widget-title">💡 Daily Safety Tip</h3>
+                <h3 class="widget-title">Daily Safety Tip</h3>
                 <div class="safety-tip">
                     <div class="tip-title">Voice Verification</div>
                     <div class="tip-text">If someone calls claiming to be family in an emergency, hang up and call them back on their known number. Voice cloning technology can now replicate voices with just a few seconds of audio.</div>
@@ -221,7 +217,7 @@
             </div>
 
             <div class="widget">
-                <h3 class="widget-title">📊 Community Stats</h3>
+                <h3 class="widget-title">Community Stats</h3>
                 <div class="trending-item">
                     <span class="trending-text">Total Reports</span>
                     <span class="trending-count">1,247</span>
@@ -241,7 +237,7 @@
             </div>
 
             <div class="widget">
-                <h3 class="widget-title">🛠️ Quick Tools</h3>
+                <h3 class="widget-title">Quick Tools</h3>
                 <a href="scanner.html" class="create-btn" style="width: 100%; margin-bottom: 1rem;">Check Suspicious Link</a>                <button class="create-btn" style="width: 100%; margin-bottom: 1rem;">Analyze Voice Message</button>
                 <button class="create-btn" style="width: 100%;">Report Scam</button>
             </div>

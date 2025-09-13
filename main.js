@@ -98,10 +98,10 @@ function joinCommunity(event) {
         areaNotListed();
     } else {
         feed.innerHTML = `
-            <h3>🌍 Western Cape - ${area} Community</h3>
+            <h3>Western Cape - ${area} Community</h3>
             <article class="post">
                 <div class="post-header">
-                    <span class="post-type community">🤝 COMMUNITY</span>
+                    <span class="post-type community">COMMUNITY</span>
                     <div class="post-meta">Posted by @LocalHero • just now • ${area}, Western Cape</div>
                 </div>
                 <div class="post-body">
@@ -116,7 +116,7 @@ function joinCommunity(event) {
 function areaNotListed() {
     const feed = document.getElementById("community-feed");
     feed.innerHTML = `
-        <h3>🌍 Western Cape Community</h3>
+        <h3>Western Cape Community</h3>
         <div class="post">
             <div class="post-body">
                 <h3 class="post-title">Area Not Listed</h3>
