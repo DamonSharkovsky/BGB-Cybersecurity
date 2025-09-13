@@ -97,7 +97,7 @@ function submitPost(event) {
     //     console.error('Error submitting post:', error);
     //     alert('An error occurred while submitting your post.');
     // });
-    console.log("listen")
+    // console.log("listen")
     createPost(title, body);
     closeModal();
 

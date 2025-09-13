@@ -18,6 +18,6 @@ def echo():
     return jsonify({"you_sent": data})
 
 if __name__ == "__main__":
-    app.run(debug=True, port=5000)
+    app.run(debug=True, port=5501)
     db.create_table(db.get_db_connection())  # ensure table exists
 
