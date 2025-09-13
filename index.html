@@ -15,10 +15,9 @@
             </div>
             <nav class="nav-links">
                 <a href="#" class="nav-link active">Home</a>
-                <a href="#" class="nav-link">Scam Reports</a>
                 <a href="qanda.html" class="nav-link">Q&A</a>
                 <a href="#" class="nav-link">Resources</a>
-                <a href="#" class="nav-link">About</a>
+                <a href="about.html" class="nav-link">About</a>
                 <a href="login.html" class="nav-link nav-btn">Login</a>
                 <a href="signup.html" class="nav-link nav-btn">Sign Up</a>
             </nav>
@@ -35,10 +34,16 @@
             
 
             <div class="tab-section" id="main-posts" style="display:block;">
-                <div class="create-post" onclick="showCreateForm()">
+                <div id="create-experience-container" class="create-post" onclick="showCreateForm()">
                     <h3>Share Your Experience or Ask a Question</h3>
                     <p>Help protect your community by reporting AI scams or asking about suspicious activity</p>
                     <button class="create-btn">+ Create New Post</button>
+                </div>
+
+                <div id="create-scam-container" class="create-post" onclick="showScamReportForm()" style="display:none;">
+                    <h3>Report a Scam</h3>
+                    <p>Seen a scam? Help others by reporting it directly and anonymously.</p>
+                    <button class="create-btn" style="background: #e53935;">+ Create Scam Report</button>
                 </div>
 
                 <div class="posts" id="posts-container">
@@ -167,6 +172,23 @@
                     <p class="placeholder">Select your province above to see updates from your area.</p>
                 </div>
             </div>
+
+            <!-- Modal for Creating Posts -->
+<div id="createPostModal" class="modal" style="display:none;">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2 id="modalTitle">Create New Post</h2>
+        <form id="createPostForm" onsubmit="submitPost(event)">
+            <label for="postTitle">Title</label>
+            <input type="text" id="postTitle" name="postTitle" required placeholder="Enter a headline...">
+
+            <label for="postBody">Body</label>
+            <textarea id="postBody" name="postBody" rows="6" required placeholder="Describe your experience or question..."></textarea>
+
+            <button type="submit" class="create-btn" style="margin-top:1rem;">Submit</button>
+        </form>
+    </div>
+</div>
         </main>
 
         <aside class="sidebar">

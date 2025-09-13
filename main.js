@@ -12,6 +12,14 @@ function showTab(tabName, event) {
     // Hide all tab sections
     document.querySelectorAll('.tab-section').forEach(section => section.style.display = 'none');
 
+    // Show/hide create post containers
+    const experienceContainer = document.getElementById('create-experience-container');
+    const scamContainer = document.getElementById('create-scam-container');
+    if (experienceContainer && scamContainer) {
+        experienceContainer.style.display = 'none';
+        scamContainer.style.display = 'none';
+    }
+
     // Show main posts for 'all' and 'scams'
     if (tabName === 'all' || tabName === 'scams' || tabName === 'questions') {
         document.getElementById('main-posts').style.display = 'block';
@@ -30,6 +38,13 @@ function showTab(tabName, event) {
                 post.style.display = 'none';
             }
         });
+
+        // Show the correct create post button
+        if (tabName === 'all' && experienceContainer) {
+            experienceContainer.style.display = 'block';
+        } else if (tabName === 'scams' && scamContainer) {
+            scamContainer.style.display = 'block';
+        }
     }
 
     // Show community tab
@@ -40,7 +55,25 @@ function showTab(tabName, event) {
 }
 
 function showCreateForm() {
-    alert('Create Post Modal would open here!\n\nFeatures:\n- Select post type (Scam Report, Question, Warning)\n- Add title and description\n- Include location (optional)\n- Add evidence/screenshots\n- Tag threat type');
+    document.getElementById('modalTitle').innerText = "Create New Post";
+    document.getElementById('createPostModal').style.display = 'flex';
+}
+
+function showScamReportForm() {
+    document.getElementById('modalTitle').innerText = "Report a Scam";
+    document.getElementById('createPostModal').style.display = 'flex';
+}
+
+function closeModal() {
+    document.getElementById('createPostModal').style.display = 'none';
+    document.getElementById('createPostForm').reset();
+}
+
+function submitPost(event) {
+    event.preventDefault();
+    // You can handle the form data here (send to backend, show success, etc.)
+    alert("Your post has been submitted!");
+    closeModal();
 }
 
 // Simulate real-time updates
