@@ -11,9 +11,10 @@ def get_data():
     data = [dict(row) for row in rows]  # convert rows to list of dicts
     return jsonify(data)
 
-@app.route('/scam', methods=['POST'])
+@app.route('/submit', methods=['POST'])
 def echo():
-    data = request.json  # data sent from frontend
+    data = request.get_json()  # data sent from frontend
+    print("sfdgbet")
     db.write_to_db(db.get_db_connection(), data)  # save to database
     return jsonify({"you_sent": data})
 

@@ -75,29 +75,30 @@ function submitPost(event) {
 
     const title = document.getElementById('postTitle').value;
     const body = document.getElementById('postBody').value;
+    const url = `http://localhost:5000/submit`;
 
-    // fetch('/submit', {
-    //     method: 'POST',
-    //     headers: {
-    //         'Content-Type': 'application/json'
-    //     },
-    //     body: JSON.stringify({
-    //         title: title,
-    //         body: body,
-    //         location: "South Africa", // This would be dynamic in a real app
-    //         date: new Date().toISOString(),
-    //     })
-    // }).then(response => {
-    //     if (response.ok) {
-    //         alert('Post submitted successfully!');
-    //     } else {
-    //         alert('Failed to submit post.');
-    //     }
-    // }).catch(error => {
-    //     console.error('Error submitting post:', error);
-    //     alert('An error occurred while submitting your post.');
-    // });
-    // console.log("listen")
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            title: title,
+            body: body,
+            location: "South Africa", // This would be dynamic in a real app
+            date: new Date().toISOString(),
+        })
+    }).then(response => {
+        if (response.ok) {
+            alert('Post submitted successfully!');
+        } else {
+            alert('Failed to submit post.');
+        }
+    }).catch(error => {
+        console.error('Error submitting post:', error);
+        alert('An error occurred while submitting your post.');
+    });
+    console.log("listen")
     createPost(title, body);
     closeModal();
 
