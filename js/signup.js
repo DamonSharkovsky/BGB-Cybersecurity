@@ -11,11 +11,11 @@ dobInput.max = maxDob.toISOString().split("T")[0];
 // Initialize intl-tel-input
 // Initialize intl-tel-input without geoIpLookup
 const phoneInput = document.querySelector("#phone");
-const iti = window.intlTelInput(phoneInput, {
-  initialCountry: "us", // or any default country code like 'gb', 'ca', etc.
-  utilsScript:
-    "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js",
-});
+// const iti = window.intlTelInput(phoneInput, {
+//   initialCountry: "us", // or any default country code like 'gb', 'ca', etc.
+//   utilsScript:
+//     "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js",
+// });
 
 // Form validation
 const form = document.getElementById("signupForm");
@@ -30,10 +30,10 @@ form.addEventListener("submit", function (e) {
   let valid = true;
 
   // Check phone number validity
-  if (!iti.isValidNumber()) {
-    showError(phoneInput, "Please enter a valid phone number.");
-    valid = false;
-  }
+//   if (!iti.isValidNumber()) {
+//     showError(phoneInput, "Please enter a valid phone number.");
+//     valid = false;
+//   }
 
   // Passwords match
   const password = form.password.value.trim();
@@ -54,10 +54,10 @@ form.addEventListener("submit", function (e) {
   }
 
   // Terms checkbox
-  if (!form.terms.checked) {
-    showError(form.terms, "You must accept the terms.");
-    valid = false;
-  }
+//   if (!form.terms.checked) {
+//     showError(form.terms, "You must accept the terms.");
+//     valid = false;
+//   }
 
   if (valid) {
     // Gather form data
@@ -65,20 +65,20 @@ form.addEventListener("submit", function (e) {
       name: form.name.value.trim(),
       surname: form.surname.value.trim(),
       email: form.email.value.trim(),
-      phone: iti.getNumber(),
+      phone: 0,
       password: password,
       dob: form.dob.value,
       gender: form.gender.value,
-      terms: form.terms.checked,
     };
 
     // For demo, just log it
-    backUpData(formData);
     console.log("Form submitted:", formData);
+    backUpData(formData);
 
     alert("Sign up successful! Check console for submitted data.");
     form.reset();
-    iti.reset();
+    // iti.reset();
+    window.location.href = "login.html";
   }
 });
 
@@ -100,5 +100,18 @@ function showError(input, message) {
 }
 
 function backUpData(formData) {
-    url = "";
+    url = "http://localhost:5000/signup";
+    options = {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: formData
+    };
+
+    fetch(url, options)
+        .then(response => response.json())
+        .then(data => {
+            console.log(data)
+        });
 }
