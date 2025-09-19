@@ -72,7 +72,7 @@ form.addEventListener("submit", function (e) {
     };
 
     // For demo, just log it
-    console.log("Form submitted:", formData);
+    // console.log("Form submitted:", formData);
     backUpData(formData);
 
     alert("Sign up successful! Check console for submitted data.");
@@ -106,12 +106,12 @@ function backUpData(formData) {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: formData
+        body: JSON.stringify(formData)
     };
 
     fetch(url, options)
         .then(response => response.json())
         .then(data => {
-            console.log(data)
+            console.log(data);
         });
 }

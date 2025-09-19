@@ -14,11 +14,11 @@
         <form class="login-form">
             <h2 class="login-title">Welcome Back</h2>
             <div class="input-group">
-                <input type="text" name="username" required autocomplete="off" class="login-input">
-                <label class="login-label">Username</label>
+                <input id="email" type="email" name="email" required autocomplete="off" class="login-input">
+                <label class="login-label">Email</label>
             </div>
             <div class="input-group">
-                <input type="password" name="password" required autocomplete="off" class="login-input">
+                <input id="password" type="password" name="password" required autocomplete="off" class="login-input">
                 <label class="login-label">Password</label>
             </div>
             <button type="submit" class="login-btn">Login</button>
@@ -31,18 +31,6 @@
             ← Back to Home
         </button>
     </div>
-    <script>
-        // Animate input labels on focus
-        document.querySelectorAll('.login-input').forEach(input => {
-            input.addEventListener('focus', function() {
-                this.nextElementSibling.classList.add('active');
-            });
-            input.addEventListener('blur', function() {
-                if (!this.value) {
-                    this.nextElementSibling.classList.remove('active');
-                }
-            });
-        });
-    </script>
+    <script src="js/login.js"></script>
 </body>
 </html>
