@@ -1,33 +1,31 @@
 # SafeGuard Community Platform 🛡️
 
-**SafeGuard Community** is a comprehensive cybersecurity awareness and community platform developed for a hackathon. The project is specifically designed to protect users—with a focus on the Western Cape, South Africa—from emerging AI-powered threats like voice cloning, deepfakes, and sophisticated phishing.
+**SafeGuard Community** is a comprehensive cybersecurity awareness and community platform designed to protect users—with a focus on the Western Cape, South Africa—from emerging AI-powered threats like voice cloning, deepfakes, and sophisticated phishing.
 
 ## 🚀 Features
 
--   **Community Feed:** A centralized hub for users to share scam alerts, ask cybersecurity questions, and post warnings.
--   **Local Area Communities:** Dedicated feeds for specific areas in the Western Cape (e.g., Cape Town, Stellenbosch, Khayelitsha) to facilitate localized safety updates.
--   **AI Scam Reporting:** An intuitive interface for reporting suspicious activities, which are then stored for community awareness.
--   **URL Scanner:** Integrated with the **VirusTotal API** to allow users to check suspicious links for malicious content.
--   **Resource Center:** Educational articles and "Daily Safety Tips" to keep users informed about the latest AI-driven scams.
--   **Secure User Authentication:** Account creation and login functionality with secure, hashed password storage.
+-   **Community Feed:** A centralized hub for sharing scam alerts, asking cybersecurity questions, and posting warnings.
+-   **Local Area Communities:** Dedicated localized safety updates for the Western Cape.
+-   **AI Threat Assistant:** A chat interface providing expert advice on AI-driven scams and digital safety.
+-   **URL Scanner:** Integrated with the **VirusTotal API** for real-time link analysis.
+-   **Resource Center:** Educational content and "Daily Safety Tips" for community awareness.
+-   **Secure Authentication:** Layered security with hashed password storage and modern data validation.
 
 ## 🛠️ Tech Stack
 
-### Frontend
--   **HTML5 & CSS3:** For a responsive and modern user interface.
--   **Vanilla JavaScript (ES6+):** Handling dynamic UI updates, tab management, and API interactions.
+### Backend (Layered Architecture)
+-   **Python (Flask):** Robust RESTful API with structured routing.
+-   **SQLAlchemy ORM:** Sophisticated data management with SQLite.
+-   **Pydantic:** Strict data validation and serialization (DTOs).
+-   **Pytest:** Comprehensive unit and integration test suite.
+-   **python-dotenv:** Secure configuration management.
 
-### Backend
--   **Python (Flask):** Powering the RESTful API endpoints.
--   **SQLite:** A lightweight database for managing users and scam reports.
--   **Werkzeug:** For secure password hashing and verification.
--   **Requests:** For handling external API calls to VirusTotal.
+### Frontend (Provider/Service Pattern)
+-   **Vanilla JavaScript (ES6+):** Modular architecture using ES6 modules.
+-   **Provider/Service Pattern:** Decoupled UI and data access layers for scalability.
+-   **HTML5 & CSS3:** Responsive, modern design.
 
 ## ⚙️ Setup & Installation
-
-### Prerequisites
--   Python 3.x
--   Virtual Environment (optional but recommended)
 
 ### 1. Clone the Repository
 ```bash
@@ -51,29 +49,40 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
+### 4. Configure Environment
+Create a `.env` file in the root directory and add your API keys:
+```env
+VT_API_KEY=your_virustotal_api_key_here
+FLASK_APP=backend/backendAPI.py
+FLASK_ENV=development
+DATABASE_URL=sqlite:///database.db
+```
+
 ## 🏃 Running the Application
 
-### Start the Backend API
+### Start the Unified Backend API
 ```bash
 python backend/backendAPI.py
 ```
-The backend server will start on `http://127.0.0.1:5501`.
-
-### Start the URL Scanner API
-```bash
-python backend/vscanner.py
-```
-The scanner service runs as a separate Flask instance.
+The server will start on `http://127.0.0.1:5501`. This unified instance handles the main API, URL scanning, and AI threat analysis.
 
 ### Launch the Frontend
-Simply open `frontend/home/index.html` in your preferred web browser. For the best experience, use a local development server like VS Code's "Live Server".
+Open `frontend/home/index.html` in your web browser. Using a local development server (like VS Code's "Live Server") is highly recommended.
+
+## 🧪 Testing
+Run the automated test suite to verify the application:
+```bash
+$env:PYTHONPATH = "."; python -m pytest
+```
 
 ## 📂 Project Structure
-
--   `backend/`: Contains Flask routes, database logic (`db.py`), and utility scripts.
--   `frontend/`: Organized by feature (login, signup, scanner, etc.), containing HTML, CSS, and JS.
--   `frontend/shared/`: Core styles and JavaScript logic shared across the platform.
--   `database.db`: The local SQLite database file.
+-   `backend/models/`: Database entities.
+-   `backend/repositories/`: Data access layer.
+-   `backend/services/`: Core business logic.
+-   `backend/schemas/`: Pydantic DTOs for data validation.
+-   `frontend/shared/providers/`: API communication layer.
+-   `frontend/shared/services/`: Frontend state and business logic.
+-   `tests/`: Unit and integration test suite.
 
 ## 🛡️ License
 This project was created for hackathon purposes.
