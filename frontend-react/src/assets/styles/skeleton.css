@@ -1,0 +1,38 @@
+.article-skeleton .skeleton-header,
+.article-skeleton .skeleton-content,
+.article-skeleton .skeleton-vote-section,
+.article-skeleton .skeleton-comments-section,
+.article-skeleton .skeleton-sidebar {
+    margin-bottom: 1.5rem;
+}
+
+.skeleton-breadcrumb,
+.skeleton-title,
+.skeleton-meta-item,
+.skeleton-tag,
+.skeleton-paragraph,
+.skeleton-vote-btn,
+.skeleton-vote-count,
+.skeleton-comment,
+.skeleton-widget {
+    background: #e0e0e0;
+    border-radius: 6px;
+    margin-bottom: 0.7rem;
+    min-height: 18px;
+    animation: shimmer 1.5s infinite linear;
+}
+
+.skeleton-title { height: 32px; width: 60%; }
+.skeleton-breadcrumb { height: 16px; width: 40%; }
+.skeleton-meta-item { height: 16px; width: 25%; display: inline-block; margin-right: 1rem; }
+.skeleton-tag { height: 18px; width: 70px; display: inline-block; margin-right: 0.5rem; }
+.skeleton-paragraph { height: 14px; width: 100%; }
+.skeleton-vote-btn { height: 32px; width: 32px; display: inline-block; }
+.skeleton-vote-count { height: 18px; width: 40px; display: inline-block; margin: 0 0.5rem; }
+.skeleton-comment { height: 40px; width: 100%; }
+.skeleton-widget { height: 60px; width: 100%; margin-bottom: 1rem; }
+
+@keyframes shimmer {
+    0% { background-position: -400px 0; }
+    100% { background-position: 400px 0; }
+}

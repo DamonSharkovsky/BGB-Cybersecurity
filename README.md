@@ -21,10 +21,12 @@
 -   **Pytest:** Comprehensive unit and integration test suite.
 -   **python-dotenv:** Secure configuration management.
 
-### Frontend (Provider/Service Pattern)
--   **Vanilla JavaScript (ES6+):** Modular architecture using ES6 modules.
--   **Provider/Service Pattern:** Decoupled UI and data access layers for scalability.
--   **HTML5 & CSS3:** Responsive, modern design.
+### Frontend (React SPA)
+-   **React 19:** Modern component-based architecture.
+-   **Vite:** Ultra-fast build tool and development server.
+-   **React Router 7:** Robust client-side routing.
+-   **Context API:** Global state management for authentication.
+-   **Custom Hooks:** Encapsulated business logic and data fetching.
 
 ## ⚙️ Setup & Installation
 
@@ -34,41 +36,40 @@ git clone <repository-url>
 cd BGB-Cybersecurity
 ```
 
-### 2. Set Up Virtual Environment
+### 2. Backend Setup
 ```bash
 # Windows
 python -m venv .venv
 .venv\Scripts\activate
-
-# Linux/macOS
-python3 -m venv .venv
-source .venv/bin/activate
+pip install -r requirements.txt
 ```
 
-### 3. Install Dependencies
+### 3. Frontend Setup
 ```bash
-pip install -r requirements.txt
+cd frontend-react
+npm install
 ```
 
 ### 4. Configure Environment
 Create a `.env` file in the root directory and add your API keys:
 ```env
 VT_API_KEY=your_virustotal_api_key_here
-FLASK_APP=backend/backendAPI.py
-FLASK_ENV=development
-DATABASE_URL=sqlite:///database.db
 ```
 
 ## 🏃 Running the Application
 
-### Start the Unified Backend API
+### 1. Start the Backend API
 ```bash
 python -m backend.backendAPI
 ```
-The server will start on `http://127.0.0.1:5501`. This unified instance handles the main API, URL scanning, and AI threat analysis.
+The server will start on `http://127.0.0.1:5501`.
 
-### Launch the Frontend
-Open `frontend/home/index.html` in your web browser. Using a local development server (like VS Code's "Live Server") is highly recommended.
+### 2. Start the Frontend
+```bash
+cd frontend-react
+npm run dev
+```
+The app will be available at `http://localhost:5173`.
 
 ## 🧪 Testing
 Run the automated test suite to verify the application:
@@ -77,12 +78,9 @@ $env:PYTHONPATH = "."; python -m pytest
 ```
 
 ## 📂 Project Structure
--   `backend/models/`: Database entities.
--   `backend/repositories/`: Data access layer.
--   `backend/services/`: Core business logic.
--   `backend/schemas/`: Pydantic DTOs for data validation.
--   `frontend/shared/providers/`: API communication layer.
--   `frontend/shared/services/`: Frontend state and business logic.
+-   `backend/`: Flask layered architecture (Models, Repositories, Services, Schemas).
+-   `frontend-react/`: React SPA source code (API, Components, Context, Hooks, Pages).
+-   `frontend/`: Legacy Vanilla JS frontend.
 -   `tests/`: Unit and integration test suite.
 
 ## 🛡️ License
