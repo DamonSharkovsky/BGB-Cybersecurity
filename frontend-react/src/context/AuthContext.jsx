@@ -20,13 +20,14 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password, rememberMe = false) => {
     try {
-      const response = await authProvider.login(email, password)
-      const { user, token } = response
-      
+      const user = await authProvider.login(email, password)
+
       const storage = rememberMe ? localStorage : sessionStorage
-      storage.setItem('token', token)
+      // The backend doesn't provide a JWT, so we store the user directly
+      // and use a dummy token for apiClient's header logic.
+      storage.setItem('token', 'dummy-token')
       storage.setItem('user', JSON.stringify(user))
-      
+
       setUser(user)
       return user
     } catch (error) {

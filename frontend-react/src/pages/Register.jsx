@@ -7,6 +7,7 @@ const Register = () => {
     name: '',
     surname: '',
     email: '',
+    phone: '',
     password: '',
     confirm_password: '',
     dob: '',
@@ -89,12 +90,24 @@ const Register = () => {
           </div>
           <div className="input-group">
             <input
+              name="phone"
+              type="tel"
+              className="login-input"
+              value={formData.phone}
+              onChange={handleChange}
+              required
+            />
+            <label className={`login-label ${formData.phone ? 'active' : ''}`}>Phone Number</label>
+          </div>
+          <div className="input-group">
+            <input
               name="password"
               type="password"
               className="login-input"
               value={formData.password}
               onChange={handleChange}
               required
+              minLength={8}
             />
             <label className={`login-label ${formData.password ? 'active' : ''}`}>Password</label>
           </div>
