@@ -62,7 +62,7 @@ DATABASE_URL=sqlite:///database.db
 
 ### Start the Unified Backend API
 ```bash
-python backend/backendAPI.py
+python -m backend.backendAPI
 ```
 The server will start on `http://127.0.0.1:5501`. This unified instance handles the main API, URL scanning, and AI threat analysis.
 
