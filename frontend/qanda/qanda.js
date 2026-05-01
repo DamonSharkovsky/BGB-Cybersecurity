@@ -1,3 +1,5 @@
+import aiProvider from '../shared/providers/AIProvider.js';
+
 const chatContainer = document.getElementById('chat-container');
 const questionInput = document.getElementById('question-input');
 const sendButton = document.getElementById('send-button');
@@ -60,20 +62,7 @@ async function sendQuestion() {
     showTypingIndicator();
 
     try {
-        // Send question to Python backend
-        const response = await fetch('/api/ask-ai', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ question: question })
-        });
-
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const data = await response.json();
+        const data = await aiProvider.analyzeThreat(question);
 
         // Hide typing indicator
         hideTypingIndicator();
@@ -174,17 +163,20 @@ Please ask me about any specific AI threat or safety concern!`;
     }
 }
 
-function askQuickQuestion(question) {
+// Global functions for HTML onclicks
+window.askQuickQuestion = (question) => {
     questionInput.value = question;
     sendQuestion();
-}
+};
 
-function handleKeyPress(event) {
+window.handleKeyPress = (event) => {
     if (event.key === 'Enter' && !event.shiftKey) {
         event.preventDefault();
         sendQuestion();
     }
-}
+};
+
+window.sendQuestion = sendQuestion;
 
 // Auto-resize textarea
 questionInput.addEventListener('input', function () {

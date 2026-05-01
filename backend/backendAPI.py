@@ -6,8 +6,8 @@ from dotenv import load_dotenv
 
 from backend.db import db
 from backend.repositories import UserRepository, PostRepository
-from backend.services import AuthService, PostService
-from backend.schemas import UserCreateDTO, UserLoginDTO, PostCreateDTO
+from backend.services import AuthService, PostService, ScannerService, AIService
+from backend.schemas import UserCreateDTO, UserLoginDTO, PostCreateDTO, UrlScanRequestDTO, AIAnalysisRequestDTO
 
 # Load environment variables
 load_dotenv()
@@ -28,6 +28,8 @@ user_repo = UserRepository()
 post_repo = PostRepository()
 auth_service = AuthService(user_repo)
 post_service = PostService(post_repo)
+scanner_service = ScannerService()
+ai_service = AIService()
 
 # Ensure tables are created within app context
 with app.app_context():
@@ -75,6 +77,28 @@ def get_post(post_id):
     if post_response:
         return jsonify(post_response.model_dump()), 200
     return jsonify({"error": "Post not found"}), 404
+
+@app.route('/api/scan', methods=['POST'])
+def scan_url():
+    try:
+        data = UrlScanRequestDTO(**request.get_json())
+        result = scanner_service.scan_url(data)
+        return jsonify(result.model_dump()), 200
+    except ValidationError as e:
+        return jsonify(e.errors()), 400
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+@app.route('/api/ai/analyze', methods=['POST'])
+def analyze_threat():
+    try:
+        data = AIAnalysisRequestDTO(**request.get_json())
+        result = ai_service.analyze_threat(data)
+        return jsonify(result.model_dump()), 200
+    except ValidationError as e:
+        return jsonify(e.errors()), 400
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 # Legacy route aliases for backward compatibility where possible
 @app.route('/all', methods=['GET'])
