@@ -23,3 +23,9 @@ class PostService(IPostService):
     def get_all_posts(self) -> List[PostResponseDTO]:
         posts = self.post_repo.get_all()
         return [PostResponseDTO.model_validate(p) for p in posts]
+
+    def get_post_by_id(self, post_id: int) -> Optional[PostResponseDTO]:
+        post = self.post_repo.get_by_id(post_id)
+        if post:
+            return PostResponseDTO.model_validate(post)
+        return None

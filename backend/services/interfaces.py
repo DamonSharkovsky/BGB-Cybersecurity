@@ -20,3 +20,7 @@ class IPostService(ABC):
     @abstractmethod
     def get_all_posts(self) -> List[PostResponseDTO]:
         pass
+
+    @abstractmethod
+    def get_post_by_id(self, post_id: int) -> Optional[PostResponseDTO]:
+        pass
