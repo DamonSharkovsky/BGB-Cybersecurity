@@ -5,3 +5,5 @@ Flask-SQLAlchemy
 pydantic
 email-validator
 python-dotenv
+pytest
+pytest-mock
