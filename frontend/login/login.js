@@ -1,33 +1,26 @@
-const login = document.querySelector(".login-form");
+import authProvider from '../shared/providers/AuthProvider.js';
 
-login.addEventListener("submit", e => {
+const loginForm = document.querySelector(".login-form");
+
+loginForm.addEventListener("submit", async (e) => {
     e.preventDefault();
 
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
 
-    url = "http://localhost:5000/login";
-    options = {
-        method: "POST",
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            email: email,
-            password: password
-        })
-    };
-
-    fetch(url, options)
-        .then(response => response.json())
-        .then(data => {
-            if (data.user_id) {
-                alert("Login successful!");
-                window.location.href = "index.html"; // redirect
-            } else {
-                alert(data.error || "Login failed.");
-            }
-        });
+    try {
+        const data = await authProvider.login(email, password);
+        if (data.id) {
+            alert("Login successful!");
+            // Store user info in localStorage if needed
+            localStorage.setItem('user', JSON.stringify(data));
+            window.location.href = "../home/index.html"; 
+        } else {
+            alert("Login failed: Unexpected response from server.");
+        }
+    } catch (error) {
+        alert(error || "Login failed.");
+    }
 });
 
 
@@ -41,4 +34,8 @@ document.querySelectorAll('.login-input').forEach(input => {
             this.nextElementSibling.classList.remove('active');
         }
     });
+    // Check if input has value on load (for browser autofill)
+    if (input.value) {
+        input.nextElementSibling.classList.add('active');
+    }
 });

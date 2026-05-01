@@ -1,8 +1,16 @@
+import os
 from flask import Flask, request, jsonify
 import requests
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 app = Flask(__name__)
-VT_API_KEY = "249b14a95330bcc0b72f5ebf6fc3a994698eff1f76b683f14e292ca12224341e"
+VT_API_KEY = os.getenv("VT_API_KEY")
+
+if not VT_API_KEY:
+    print("Warning: VT_API_KEY not found in environment variables.")
 
 @app.route('/scan', methods=['POST'])
 def scan_url():

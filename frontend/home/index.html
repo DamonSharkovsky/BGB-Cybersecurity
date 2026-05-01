@@ -27,14 +27,14 @@
     <div class="container">
         <main class="main-content">
             <div class="tabs">
-                <button class="tab" onclick="showTab('community', event)">Community</button>
-                <button class="tab" onclick="showTab('scams', event)">News Reports</button>
-                <button class="tab active" onclick="showTab('all', event)">All Posts</button>
+                <button class="tab">Community</button>
+                <button class="tab">News Reports</button>
+                <button class="tab active">All Posts</button>
             </div>
             
 
             <div class="tab-section" id="main-posts" style="display:block;">
-                <div id="create-experience-container" class="create-post" onclick="showCreateForm()">
+                <div id="create-experience-container" class="create-post">
                     <h3>Share Your Experience or Ask a Question</h3>
                     <p>Help protect your community by reporting AI scams or asking about suspicious activity</p>
                     <button class="create-btn">+ Create New Post</button>
@@ -244,7 +244,7 @@
         </aside>
     </div>
 
-    <script src="../shared/main.js">
+    <script type="module" src="../shared/main.js">
     </script>
 </body>
 </html>

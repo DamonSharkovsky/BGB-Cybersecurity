@@ -4,3 +4,4 @@ requests
 Flask-SQLAlchemy
 pydantic
 email-validator
+python-dotenv

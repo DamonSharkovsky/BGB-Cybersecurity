@@ -1,131 +1,220 @@
-function showTab(tabName, event) {
-    // Remove active class from all tabs
-    document.querySelectorAll('.tab').forEach(tab => {
-        tab.classList.remove('active');
+import postService from './services/PostService.js';
+import authProvider from './providers/AuthProvider.js';
+
+// --- UI Logic & State ---
+const state = {
+    currentTab: 'all',
+};
+
+// --- DOM Elements ---
+const elements = {
+    tabs: document.querySelectorAll('.tab'),
+    tabSections: document.querySelectorAll('.tab-section'),
+    postsContainer: document.getElementById('posts-container'),
+    createPostModal: document.getElementById('createPostModal'),
+    createPostForm: document.getElementById('createPostForm'),
+    modalTitle: document.getElementById('modalTitle'),
+    experienceContainer: document.getElementById('create-experience-container'),
+    scamContainer: document.getElementById('create-scam-container'),
+    communityTab: document.getElementById('community-tab'),
+    mainPosts: document.getElementById('main-posts'),
+    communityFeed: document.getElementById('community-feed'),
+};
+
+// --- Initialization ---
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('SafeGuard Community Platform Loaded');
+    initEventListeners();
+    loadInitialData();
+});
+
+function initEventListeners() {
+    // Tab switching
+    elements.tabs.forEach(tab => {
+        tab.addEventListener('click', (e) => {
+            const tabName = e.target.textContent.toLowerCase().includes('news') ? 'scams' : 
+                            e.target.textContent.toLowerCase().includes('community') ? 'community' : 'all';
+            showTab(tabName, e.target);
+        });
     });
 
-    // Add active class to clicked tab
-    if (event && event.target) {
-        event.target.classList.add('active');
+    // Modal management
+    if (elements.experienceContainer) {
+        elements.experienceContainer.addEventListener('click', () => showModal('Create New Post'));
+    }
+    
+    // Using event delegation for dynamic elements or just direct binding if they exist
+    const closeBtn = document.querySelector('.close');
+    if (closeBtn) {
+        closeBtn.addEventListener('click', closeModal);
     }
 
-    // Hide all tab sections
-    document.querySelectorAll('.tab-section').forEach(section => section.style.display = 'none');
+    if (elements.createPostForm) {
+        elements.createPostForm.addEventListener('submit', handlePostSubmit);
+    }
+
+    // Article clicks (for static articles)
+    document.querySelectorAll('article.post').forEach(article => {
+        article.addEventListener('click', () => {
+            const target = article.getAttribute('data-target');
+            if (target) window.location.href = target;
+        });
+    });
+}
+
+async function loadInitialData() {
+    try {
+        await postService.loadPosts(renderPosts);
+    } catch (error) {
+        console.error('Error loading initial data:', error);
+    }
+}
+
+// --- Tab Logic ---
+function showTab(tabName, targetElement) {
+    state.currentTab = tabName;
+
+    // Update active tab UI
+    elements.tabs.forEach(tab => tab.classList.remove('active'));
+    if (targetElement) targetElement.classList.add('active');
+
+    // Hide all sections
+    elements.tabSections.forEach(section => section.style.display = 'none');
+
+    if (tabName === 'community') {
+        elements.mainPosts.style.display = 'none';
+        elements.communityTab.style.display = 'block';
+    } else {
+        elements.mainPosts.style.display = 'block';
+        elements.communityTab.style.display = 'none';
+        filterPosts(tabName);
+    }
 
     // Show/hide create post containers
-    const experienceContainer = document.getElementById('create-experience-container');
-    const scamContainer = document.getElementById('create-scam-container');
-    if (experienceContainer && scamContainer) {
-        experienceContainer.style.display = 'none';
-        scamContainer.style.display = 'none';
+    if (elements.experienceContainer) {
+        elements.experienceContainer.style.display = (tabName === 'all') ? 'block' : 'none';
     }
+}
 
-    // Show main posts for 'all' and 'scams'
-    if (tabName === 'all' || tabName === 'scams' || tabName === 'questions') {
-        document.getElementById('main-posts').style.display = 'block';
-        document.getElementById('community-tab').style.display = 'none';
-        // Filter posts as before
-        const posts = document.querySelectorAll('.post');
-        posts.forEach(post => {
-            const postType = post.querySelector('.post-type');
-            if (tabName === 'all') {
-                post.style.display = 'block';
-            } else if (tabName === 'scams' && (postType.classList.contains('scam-alert') || postType.classList.contains('warning'))) {
-                post.style.display = 'block';
-            } else if (tabName === 'questions' && postType.classList.contains('question')) {
-                post.style.display = 'block';
-            } else {
-                post.style.display = 'none';
-            }
-        });
+function filterPosts(tabName) {
+    const posts = document.querySelectorAll('.post');
+    posts.forEach(post => {
+        const typeEl = post.querySelector('.post-type');
+        if (!typeEl) return;
 
-        // Show the correct create post button
-        if (tabName === 'all' && experienceContainer) {
-            experienceContainer.style.display = 'block';
-        } else if (tabName === 'scams' && scamContainer) {
-            scamContainer.style.display = 'block';
+        const type = typeEl.textContent.toLowerCase();
+        if (tabName === 'all') {
+            post.style.display = 'block';
+        } else if (tabName === 'scams' && (type.includes('scam') || type.includes('warning'))) {
+            post.style.display = 'block';
+        } else if (tabName === 'questions' && type.includes('question')) {
+            post.style.display = 'block';
+        } else {
+            post.style.display = 'none';
         }
-    }
-
-    // Show community tab
-    if (tabName === 'community') {
-        document.getElementById('main-posts').style.display = 'none';
-        document.getElementById('community-tab').style.display = 'block';
-    }
+    });
 }
 
-function showCreateForm() {
-    document.getElementById('modalTitle').innerText = "Create New Post";
-    document.getElementById('createPostModal').style.display = 'flex';
-}
-
-function showScamReportForm() {
-    document.getElementById('modalTitle').innerText = "Report a Scam";
-    document.getElementById('createPostModal').style.display = 'flex';
+// --- Modal Logic ---
+function showModal(title) {
+    elements.modalTitle.innerText = title;
+    elements.createPostModal.style.display = 'flex';
 }
 
 function closeModal() {
-    document.getElementById('createPostModal').style.display = 'none';
-    document.getElementById('createPostForm').reset();
+    elements.createPostModal.style.display = 'none';
+    elements.createPostForm.reset();
 }
 
-function submitPost(event) {
+// --- Post Logic ---
+async function handlePostSubmit(event) {
     event.preventDefault();
-    // post scam alert
 
-    const title = document.getElementById('postTitle').value;
-    const body = document.getElementById('postBody').value;
-    const url = `http://localhost:5000/submit`;
+    const postData = {
+        title: document.getElementById('postTitle').value,
+        content: document.getElementById('postBody').value,
+        type: 'SCAM_ALERT', // Defaulting for now
+        location: 'South Africa',
+        author_id: 1, // Mock author_id until auth is fully integrated
+    };
 
-    fetch(url, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            title: title,
-            body: body,
-            location: "South Africa", // This would be dynamic in a real app
-            date: new Date().toISOString(),
-        })
-    }).then(response => {
-        if (response.ok) {
+    try {
+        await postService.submitPost(postData, (newPost) => {
             alert('Post submitted successfully!');
-        } else {
-            alert('Failed to submit post.');
-        }
-    }).catch(error => {
-        console.error('Error submitting post:', error);
-        alert('An error occurred while submitting your post.');
-    });
-    console.log("listen")
-    createPost(title, body);
-    closeModal();
-
+            renderNewPost(newPost);
+            closeModal();
+        });
+    } catch (error) {
+        alert('Failed to submit post: ' + error);
+    }
 }
 
-// Simulate real-time updates
-function addNotification() {
-    const notifications = [
-        "🚨 New scam reported in your area",
-        "💬 Your question received a new answer",
-        "⚠️ Trending threat alert: AI voice scams increasing",
-        "✅ Community verified your scam report"
-    ];
+function renderPosts(posts) {
+    // Clear existing static posts
+    elements.postsContainer.innerHTML = '';
     
-    // This would be implemented with WebSocket or polling in real app
-    console.log("Notification system would show:", notifications[Math.floor(Math.random() * notifications.length)]);
+    if (posts.length === 0) {
+        elements.postsContainer.innerHTML = '<p class="placeholder">No posts yet. Be the first to share!</p>';
+        return;
+    }
+
+    posts.forEach(post => renderNewPost(post, false));
 }
 
-function joinCommunity(event) {
-    event.preventDefault();
-    const area = document.getElementById("area").value;
-    const feed = document.getElementById("community-feed");
+function renderNewPost(post, prepend = true) {
+    const postEl = document.createElement('article');
+    postEl.className = 'post';
+    
+    // Format the date if it's a string
+    const dateStr = post.created_at ? new Date(post.created_at).toLocaleString() : 'just now';
+    
+    postEl.innerHTML = `
+        <div class="post-header">
+            <span class="post-type ${getPostTypeClass(post.type)}">${post.type.replace('_', ' ')}</span>
+            <div class="post-meta">Posted by @User • ${dateStr} • ${post.location}</div>
+        </div>
+        <div class="post-body">
+            <h3 class="post-title">${post.title}</h3>
+            <p class="post-preview">${post.content}</p>
+        </div>
+        <div class="post-footer">
+            <div class="post-stats">
+                <span class="stat">👍 ${post.upvotes || 0} upvotes</span>
+                <span class="stat">💬 0 comments</span>
+                <span class="stat">⚠️ Community Report</span>
+            </div>
+        </div>
+    `;
 
+    if (prepend) {
+        elements.postsContainer.prepend(postEl);
+    } else {
+        elements.postsContainer.appendChild(postEl);
+    }
+}
+
+function getPostTypeClass(type) {
+    switch (type) {
+        case 'SCAM_ALERT': return 'scam-alert';
+        case 'QUESTION': return 'question';
+        case 'WARNING': return 'warning';
+        default: return 'community';
+    }
+}
+
+// --- Global helper functions for legacy HTML onclicks (if not fully refactored yet) ---
+window.showTab = showTab;
+window.showCreateForm = () => showModal('Create New Post');
+window.showScamReportForm = () => showModal('Report a Scam');
+window.closeModal = closeModal;
+window.submitPost = handlePostSubmit;
+window.joinCommunity = (e) => {
+    e.preventDefault();
+    const area = document.getElementById("area").value;
     if (area === "Other") {
         areaNotListed();
     } else {
-        feed.innerHTML = `
+        elements.communityFeed.innerHTML = `
             <h3>Western Cape - ${area} Community</h3>
             <article class="post">
                 <div class="post-header">
@@ -139,11 +228,10 @@ function joinCommunity(event) {
             </article>
         `;
     }
-}
+};
 
 function areaNotListed() {
-    const feed = document.getElementById("community-feed");
-    feed.innerHTML = `
+    elements.communityFeed.innerHTML = `
         <h3>Western Cape Community</h3>
         <div class="post">
             <div class="post-body">
@@ -156,106 +244,4 @@ function areaNotListed() {
         </div>
     `;
 }
-
-// Initialize
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('SafeGuard Community Platform Loaded');
-    console.log('Backend would handle: User authentication, post CRUD operations, AI threat analysis, community moderation');
-    
-    // Simulate periodic updates
-    setInterval(addNotification, 30000);
-});
-
-
-const articles = document.querySelectorAll("article");
-
-
-articles.forEach(article => {
-    article.addEventListener("click", () => {
-        console.log("catch")
-        const targetPage = article.getAttribute("data-target");
-
-        window.location.href = targetPage;
-    })
-    
-})
-
-
-async function fetchAllData() {
-    try {
-        const response = await fetch('https://localhost:5000/all');
-        const data = await response.json();
-        updateData(data);
-    } catch (error) {
-        console.error('Error fetching data:', error);
-    }
-}
-
-window.onload = () => {
-    fetchAllData();
-}
-
-function updateData(data) {
-    // document.getElementById('totalScams').innerText = data.totalScams;
-    // document.getElementById('totalWarnings').innerText = data.totalWarnings;
-    // document.getElementById('totalQuestions').innerText = data.totalQuestions;
-    // document.getElementById('totalCommunityPosts').innerText = data.totalCommunityPosts;
-}
-
-document.getElementById('post-button').addEventListener('click', submitPost);
-
-
-function createPost(title, body) {
-    const postContainer = document.getElementById('posts-container');
-    
-
-    const post = document.createElement('article');
-    post.className = 'post';
-    postContainer.prepend(post);
-
-    const postHeader = document.createElement('div');
-    // postHeader.add.classList("post-body");
-    postHeader.className = 'post-header';
-    post.appendChild(postHeader);
-
-    const postType = document.createElement('span');
-    postType.className = 'post-type scam-alert';
-    postType.innerText = '🚨 SCAM ALERT'; 
-    postHeader.appendChild(postType);
-
-    const postMeta = document.createElement('div');
-    postMeta.className = 'post-meta';
-    postMeta.innerText = `Posted by @User • just now • Location`;
-    postHeader.appendChild(postMeta);
-
-    const postBody = document.createElement('div');
-    postBody.className = 'post-body';
-    post.appendChild(postBody);
-
-    const postTitle = document.createElement('h3');
-    postTitle.className = 'post-title';
-    postTitle.innerText = title;
-    postBody.appendChild(postTitle);
-
-    const postPreview = document.createElement('p');
-    postPreview.className = 'post-preview';
-    postPreview.innerText = body;
-    postBody.appendChild(postPreview);
-
-    postHeader.appendChild(postType);
-    postHeader.appendChild(postMeta);
-    post.appendChild(postHeader);
-    post.appendChild(postBody);
-
-    const postActions = document.createElement('div');
-    postActions.className = 'post-footer';
-
-    const postStat = document.createElement('div');
-    postStat.className = 'post-stats';
-    postStat.innerHTML = `<span class="stat">👍 24 upvotes</span>
-                                <span class="stat">💬 8 comments</span>
-                                <span class="stat">⚠️ 12 similar reports</span>`;
-    postActions.appendChild(postStat);
-
-    post.appendChild(postActions);
-}
+window.areaNotListed = areaNotListed;

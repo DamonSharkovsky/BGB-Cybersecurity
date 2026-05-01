@@ -2,19 +2,23 @@ import os
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 from pydantic import ValidationError
+from dotenv import load_dotenv
 
 from backend.db import db
 from backend.repositories import UserRepository, PostRepository
 from backend.services import AuthService, PostService
 from backend.schemas import UserCreateDTO, UserLoginDTO, PostCreateDTO
 
+# Load environment variables
+load_dotenv()
+
 app = Flask(__name__)
 CORS(app)
 
 # Database Configuration
 basedir = os.path.abspath(os.path.dirname(__file__))
-# The database file is in the root, which is one level up from 'backend/'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(os.path.dirname(basedir), 'database.db')
+default_db_url = 'sqlite:///' + os.path.join(os.path.dirname(basedir), 'database.db')
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', default_db_url)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db.init_app(app)
