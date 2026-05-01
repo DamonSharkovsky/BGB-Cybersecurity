@@ -24,3 +24,6 @@ Thumbs.db
 # Environment variables
 .env
 .flaskenv
+
+# Gemini CLI
+GEMINI.md
