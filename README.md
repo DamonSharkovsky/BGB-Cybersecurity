@@ -4,8 +4,9 @@
 
 ## 🚀 Features
 
--   **Community Feed:** A centralized hub for sharing scam alerts, asking cybersecurity questions, and posting warnings.
--   **Local Area Communities:** Dedicated localized safety updates for the Western Cape.
+-   **Community Feed:** A centralized hub for sharing scam alerts, asking cybersecurity questions, and posting warnings, featuring real-time user metadata and comment counts.
+-   **Local Area Communities:** Dedicated localized safety updates for the Western Cape with dynamic area selection.
+-   **Home Dashboard:** Dynamic sidebar widgets featuring "Trending Threats," "Daily Safety Tips," and "Community Stats" updated directly from the backend.
 -   **AI Threat Assistant:** A chat interface providing expert advice on AI-driven scams and digital safety.
 -   **URL Scanner:** Integrated with the **VirusTotal API** for real-time link analysis.
 -   **Resource Center:** Educational content and "Daily Safety Tips" for community awareness.
