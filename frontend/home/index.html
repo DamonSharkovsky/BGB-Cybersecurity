@@ -43,89 +43,8 @@
 
 
                 <div class="posts" id="posts-container">
-                    <!-- Scam Report Post -->
-                    <article class="post" data-target="../articles/article1.html">
-                        <div class="post-header">
-                            <span class="post-type scam-alert">SCAM ALERT</span>
-                            <div class="post-meta">
-                             Posted by @SafeUser123 • 2 hours ago • Western Cape, Strand
-                                    </div>
-                        </div>
-                        <div class="post-body">
-                            <h3 class="post-title">AI Voice Clone Scam Targeting Seniors</h3>
-                            <p class="post-preview">My grandmother received a call that sounded exactly like my voice asking for emergency money. The scammer had cloned my voice from my social media videos. She almost fell for it...</p>
-                        </div>
-                        <div class="post-footer">
-                            <div class="post-stats">
-                                <span class="stat">👍 24 upvotes</span>
-                                <span class="stat">💬 8 comments</span>
-                                <span class="stat">⚠️ 12 similar reports</span>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- Question Post -->
-                    <article class="post" data-target="../articles/article2.html">
-                        <div class="post-header">
-                            <span class="post-type question">QUESTION</span>
-                            <div class="post-meta">
-                                 Posted by @TechNewbie • 4 hours ago • Western Cape, Khayelitsha
-                                    </div>
-                        </div>
-                        <div class="post-body">
-                            <h3 class="post-title">How can I tell if an email is AI-generated?</h3>
-                            <p class="post-p    review">I've been getting emails that seem too well-written to be from scammers, but something feels off. Are there signs that an email might be written by AI?</p>
-                        </div>
-                        <div class="post-footer">
-                            <div class="post-stats">
-                                <span class="stat">👍 18 upvotes</span>
-                                <span class="stat">💬 15 comments</span>
-                                <span class="stat">✅ 3 expert answers</span>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- Warning Post -->
-                    <article class="post" data-target="../articles/article3.html">
-                        <div class="post-header">
-                            <span class="post-type warning">WARNING</span>
-                            <div class="post-meta">
-                                  Posted by @SmallBizOwner • 6 hours ago • Western Cape, Claremont
-                                    </div>
-                        </div>
-                        <div class="post-body">
-                            <h3 class="post-title">Deepfake Video Call Scam Targeting Business Owners</h3>
-                            <p class="post-preview">Someone made a deepfake video call pretending to be my business partner asking me to transfer funds. The video quality was good enough that I almost believed it...</p>
-                        </div>
-                        <div class="post-footer">
-                            <div class="post-stats">
-                                <span class="stat">👍 31 upvotes</span>
-                                <span class="stat">💬 12 comments</span>
-                                <span class="stat">⚠️ 6 similar reports</span>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- Community Question -->
-                    <article class="post" data-target="../articles/article4.html">
-                        <div class="post-header">
-                            <span class="post-type question">QUESTION</span>
-                            <div class="post-meta">
-                                     Posted by @ConcernedGrandpa • 8 hours ago • Western Cape, Bellville
-                                    </div>
-                        </div>
-                        <div class="post-body">
-                            <h3 class="post-title">What should I teach my grandchildren about AI safety?</h3>
-                            <p class="post-preview">My grandchildren are very tech-savvy but I'm worried they might not recognize new AI-powered scams. What are the most important things they should know?</p>
-                        </div>
-                        <div class="post-footer">
-                            <div class="post-stats">
-                                <span class="stat">👍 45 upvotes</span>
-                                <span class="stat">💬 22 comments</span>
-                                <span class="stat">📚 Added to resources</span>
-                            </div>
-                        </div>
-                    </article>
+                    <!-- Posts will be loaded dynamically -->
+                    <p class="placeholder">Loading posts...</p>
                 </div>
             </div>
 
@@ -138,25 +57,7 @@
     <label for="area">Select Your Area in Western Cape:</label>
     <select id="area" name="area" required>
         <option value="">-- Choose Area --</option>
-        <option value="Cape Town">Cape Town</option>
-        <option value="Wynberg">Wynberg</option>
-        <option value="Claremont">Claremont</option>
-        <option value="Bellville">Bellville</option>
-        <option value="Mitchells Plain">Mitchells Plain</option>
-        <option value="Stellenbosch">Stellenbosch</option>
-        <option value="Somerset West">Somerset West</option>
-        <option value="Paarl">Paarl</option>
-        <option value="George">George</option>
-        <option value="Knysna">Knysna</option>
-        <option value="Mossel Bay">Mossel Bay</option>
-        <option value="Khayelitsha">Khayelitsha</option>
-        <option value="Gugulethu">Gugulethu</option>
-        <option value="Langa">Langa</option>
-        <option value="Fish Hoek">Fish Hoek</option>
-        <option value="Grassy Park">Grassy Park</option>
-        <option value="Durbanville">Durbanville</option>
-        <option value="Atlantis">Atlantis</option>
-        <option value="Strand">Strand</option>
+        <!-- Areas will be loaded dynamically -->
     </select>
     <br><br>
     <button class="create-btn" type="submit">Join Community</button>
@@ -188,51 +89,24 @@
         </main>
 
         <aside class="sidebar">
-            <div class="widget">
+            <div class="widget" id="trending-threats-widget">
                 <h3 class="widget-title">Trending Threats</h3>
-                <div class="trending-item">
-                    <span class="trending-text">AI Voice Cloning Scams</span>
-                    <span class="trending-count">24 reports</span>
-                </div>
-                <div class="trending-item">
-                    <span class="trending-text">Deepfake Video Calls</span>
-                    <span class="trending-count">18 reports</span>
-                </div>
-                <div class="trending-item">
-                    <span class="trending-text">AI-Generated Phishing Emails</span>
-                    <span class="trending-count">31 reports</span>
-                </div>
-                <div class="trending-item">
-                    <span class="trending-text">Fake AI Customer Service</span>
-                    <span class="trending-count">12 reports</span>
+                <div id="trending-threats-container">
+                    <p class="placeholder">Loading...</p>
                 </div>
             </div>
 
-            <div class="widget">
+            <div class="widget" id="safety-tip-widget">
                 <h3 class="widget-title">Daily Safety Tip</h3>
-                <div class="safety-tip">
-                    <div class="tip-title">Voice Verification</div>
-                    <div class="tip-text">If someone calls claiming to be family in an emergency, hang up and call them back on their known number. Voice cloning technology can now replicate voices with just a few seconds of audio.</div>
+                <div id="safety-tip-container">
+                    <p class="placeholder">Loading...</p>
                 </div>
             </div>
 
-            <div class="widget">
+            <div class="widget" id="community-stats-widget">
                 <h3 class="widget-title">Community Stats</h3>
-                <div class="trending-item">
-                    <span class="trending-text">Total Reports</span>
-                    <span class="trending-count">1,247</span>
-                </div>
-                <div class="trending-item">
-                    <span class="trending-text">Active Communities</span>
-                    <span class="trending-count">89</span>
-                </div>
-                <div class="trending-item">
-                    <span class="trending-text">Questions Answered</span>
-                    <span class="trending-count">456</span>
-                </div>
-                <div class="trending-item">
-                    <span class="trending-text">Scams Prevented</span>
-                    <span class="trending-count">312</span>
+                <div id="community-stats-container">
+                    <p class="placeholder">Loading...</p>
                 </div>
             </div>
 

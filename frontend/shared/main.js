@@ -1,4 +1,5 @@
 import postService from './services/PostService.js';
+import homeService from './services/HomeService.js';
 import authProvider from './providers/AuthProvider.js';
 
 // --- UI Logic & State ---
@@ -19,6 +20,10 @@ const elements = {
     communityTab: document.getElementById('community-tab'),
     mainPosts: document.getElementById('main-posts'),
     communityFeed: document.getElementById('community-feed'),
+    areaSelect: document.getElementById('area'),
+    trendingThreatsContainer: document.getElementById('trending-threats-container'),
+    safetyTipContainer: document.getElementById('safety-tip-container'),
+    communityStatsContainer: document.getElementById('community-stats-container'),
 };
 
 // --- Initialization ---
@@ -52,101 +57,84 @@ function initEventListeners() {
     if (elements.createPostForm) {
         elements.createPostForm.addEventListener('submit', handlePostSubmit);
     }
-
-    // Article clicks (for static articles)
-    document.querySelectorAll('article.post').forEach(article => {
-        article.addEventListener('click', () => {
-            const target = article.getAttribute('data-target');
-            if (target) window.location.href = target;
-        });
-    });
 }
 
 async function loadInitialData() {
     try {
-        await postService.loadPosts(renderPosts);
+        // Load all data in parallel
+        const [posts, dashboard, areas] = await Promise.all([
+            postService.loadPosts(),
+            homeService.loadDashboardData(),
+            homeService.loadAreas()
+        ]);
+
+        renderPosts(posts);
+        renderDashboard(dashboard);
+        renderAreas(areas);
     } catch (error) {
         console.error('Error loading initial data:', error);
     }
 }
 
-// --- Tab Logic ---
-function showTab(tabName, targetElement) {
-    state.currentTab = tabName;
+// --- Rendering Logic ---
 
-    // Update active tab UI
-    elements.tabs.forEach(tab => tab.classList.remove('active'));
-    if (targetElement) targetElement.classList.add('active');
+function renderDashboard(data) {
+    if (!data) return;
 
-    // Hide all sections
-    elements.tabSections.forEach(section => section.style.display = 'none');
-
-    if (tabName === 'community') {
-        elements.mainPosts.style.display = 'none';
-        elements.communityTab.style.display = 'block';
-    } else {
-        elements.mainPosts.style.display = 'block';
-        elements.communityTab.style.display = 'none';
-        filterPosts(tabName);
+    // Render Trending Threats
+    if (elements.trendingThreatsContainer) {
+        elements.trendingThreatsContainer.innerHTML = data.trending_threats.length > 0 
+            ? data.trending_threats.map(threat => `
+                <div class="trending-item">
+                    <span class="trending-text">${threat.name}</span>
+                    <span class="trending-count">${threat.report_count} reports</span>
+                </div>
+            `).join('')
+            : '<p class="placeholder">No trending threats found.</p>';
     }
 
-    // Show/hide create post containers
-    if (elements.experienceContainer) {
-        elements.experienceContainer.style.display = (tabName === 'all') ? 'block' : 'none';
-    }
-}
-
-function filterPosts(tabName) {
-    const posts = document.querySelectorAll('.post');
-    posts.forEach(post => {
-        const typeEl = post.querySelector('.post-type');
-        if (!typeEl) return;
-
-        const type = typeEl.textContent.toLowerCase();
-        if (tabName === 'all') {
-            post.style.display = 'block';
-        } else if (tabName === 'scams' && (type.includes('scam') || type.includes('warning'))) {
-            post.style.display = 'block';
-        } else if (tabName === 'questions' && type.includes('question')) {
-            post.style.display = 'block';
+    // Render Safety Tip
+    if (elements.safetyTipContainer) {
+        if (data.safety_tips && data.safety_tips.length > 0) {
+            const tip = data.safety_tips[0]; // Just show the first one for now
+            elements.safetyTipContainer.innerHTML = `
+                <div class="safety-tip">
+                    <div class="tip-title">${tip.title}</div>
+                    <div class="tip-text">${tip.content}</div>
+                </div>
+            `;
         } else {
-            post.style.display = 'none';
+            elements.safetyTipContainer.innerHTML = '<p class="placeholder">Check back later for safety tips.</p>';
         }
-    });
-}
-
-// --- Modal Logic ---
-function showModal(title) {
-    elements.modalTitle.innerText = title;
-    elements.createPostModal.style.display = 'flex';
-}
-
-function closeModal() {
-    elements.createPostModal.style.display = 'none';
-    elements.createPostForm.reset();
-}
-
-// --- Post Logic ---
-async function handlePostSubmit(event) {
-    event.preventDefault();
-
-    const postData = {
-        title: document.getElementById('postTitle').value,
-        content: document.getElementById('postBody').value,
-        type: 'SCAM_ALERT', // Defaulting for now
-        location: 'South Africa',
-        author_id: 1, // Mock author_id until auth is fully integrated
-    };
-
-    try {
-        await postService.submitPost(postData, (newPost) => {
-            alert('Post submitted successfully!');
-            renderNewPost(newPost);
-            closeModal();
-        });
-    } catch (error) {
-        alert('Failed to submit post: ' + error);
     }
+
+    // Render Community Stats
+    if (elements.communityStatsContainer) {
+        elements.communityStatsContainer.innerHTML = data.community_stats.length > 0
+            ? data.community_stats.map(stat => `
+                <div class="trending-item">
+                    <span class="trending-text">${stat.label}</span>
+                    <span class="trending-count">${stat.value}</span>
+                </div>
+            `).join('')
+            : '<p class="placeholder">No stats available.</p>';
+    }
+}
+
+function renderAreas(areas) {
+    if (!elements.areaSelect || !areas) return;
+
+    // Keep the first default option
+    const defaultOption = elements.areaSelect.options[0];
+    elements.areaSelect.innerHTML = '';
+    elements.areaSelect.appendChild(defaultOption);
+
+    areas.forEach(area => {
+        const option = document.createElement('option');
+        option.value = area.name;
+        option.textContent = area.name;
+        elements.areaSelect.appendChild(option);
+    });
 }
 
 function renderPosts(posts) {
@@ -167,11 +155,13 @@ function renderNewPost(post, prepend = true) {
     
     // Format the date if it's a string
     const dateStr = post.created_at ? new Date(post.created_at).toLocaleString() : 'just now';
+    const authorName = post.author_name || 'User';
+    const commentCount = post.comment_count || 0;
     
     postEl.innerHTML = `
         <div class="post-header">
             <span class="post-type ${getPostTypeClass(post.type)}">${post.type.replace('_', ' ')}</span>
-            <div class="post-meta">Posted by @User • ${dateStr} • ${post.location}</div>
+            <div class="post-meta">Posted by @${authorName} • ${dateStr} • ${post.location}</div>
         </div>
         <div class="post-body">
             <h3 class="post-title">${post.title}</h3>
@@ -180,7 +170,7 @@ function renderNewPost(post, prepend = true) {
         <div class="post-footer">
             <div class="post-stats">
                 <span class="stat">👍 ${post.upvotes || 0} upvotes</span>
-                <span class="stat">💬 0 comments</span>
+                <span class="stat">💬 ${commentCount} comments</span>
                 <span class="stat">⚠️ Community Report</span>
             </div>
         </div>

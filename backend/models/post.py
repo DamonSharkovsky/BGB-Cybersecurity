@@ -16,5 +16,13 @@ class Post(db.Model):
     # Relationships
     comments = db.relationship('Comment', backref='post', lazy=True)
 
+    @property
+    def author_name(self):
+        return self.author.name if self.author else "Unknown"
+
+    @property
+    def comment_count(self):
+        return len(self.comments)
+
     def __repr__(self):
         return f'<Post {self.title}>'

@@ -5,8 +5,8 @@ from pydantic import ValidationError
 from dotenv import load_dotenv
 
 from backend.db import db
-from backend.repositories import UserRepository, PostRepository
-from backend.services import AuthService, PostService, ScannerService, AIService
+from backend.repositories import UserRepository, PostRepository, HomeRepository, AreaRepository
+from backend.services import AuthService, PostService, ScannerService, AIService, HomeService
 from backend.schemas import UserCreateDTO, UserLoginDTO, PostCreateDTO, UrlScanRequestDTO, AIAnalysisRequestDTO
 
 # Load environment variables
@@ -26,10 +26,14 @@ db.init_app(app)
 # Initialize Repositories and Services
 user_repo = UserRepository()
 post_repo = PostRepository()
+home_repo = HomeRepository()
+area_repo = AreaRepository()
+
 auth_service = AuthService(user_repo)
 post_service = PostService(post_repo)
 scanner_service = ScannerService()
 ai_service = AIService()
+home_service = HomeService(home_repo, area_repo)
 
 # Ensure tables are created within app context
 with app.app_context():
@@ -77,6 +81,16 @@ def get_post(post_id):
     if post_response:
         return jsonify(post_response.model_dump()), 200
     return jsonify({"error": "Post not found"}), 404
+
+@app.route('/api/home/dashboard', methods=['GET'])
+def get_dashboard():
+    dashboard_data = home_service.get_dashboard_data()
+    return jsonify(dashboard_data.model_dump()), 200
+
+@app.route('/api/areas', methods=['GET'])
+def get_areas():
+    areas = home_service.get_all_areas()
+    return jsonify([a.model_dump() for a in areas]), 200
 
 @app.route('/api/scan', methods=['POST'])
 def scan_url():

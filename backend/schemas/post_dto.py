@@ -14,7 +14,9 @@ class PostCreateDTO(PostBaseDTO):
 class PostResponseDTO(PostBaseDTO):
     id: int
     author_id: int
+    author_name: str
     created_at: datetime
     upvotes: int
+    comment_count: int
 
     model_config = ConfigDict(from_attributes=True)
